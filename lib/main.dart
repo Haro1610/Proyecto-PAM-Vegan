@@ -1,67 +1,33 @@
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:planternativo/login/login.dart';
+import 'package:planternativo/principal/principal.dart';
+import 'package:planternativo/recetaEsp/recetaEsp.dart';
+import 'package:planternativo/restaurantes/restaurantes.dart';
+import 'package:planternativo/perfil/perfil.dart';
+
+//Bloc
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ),
+      theme: ThemeData(primarySwatch: Colors.purple),
+      title: 'Material App',
+      home: Restaurantes(),
+      /*MultiBlocProvider(
+        providers: [
+          
+          BlocProvider(create: (context) => FraseBloc()..add(FraseGet())),
+          BlocProvider(create: (context) => ImageBloc()..add(ImageGet())),
+          BlocProvider(create: (context) => TimeBloc()..add(TimeGet())),
+        ],
+        child: Principal(),
+      ),*/
     );
   }
 }
