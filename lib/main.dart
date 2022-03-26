@@ -22,10 +22,10 @@ class MyApp extends StatelessWidget {
       home: Perfil(),
       /*MultiBlocProvider(
         providers: [
-          /*
+          
           BlocProvider(create: (context) => FraseBloc()..add(FraseGet())),
           BlocProvider(create: (context) => ImageBloc()..add(ImageGet())),
-          BlocProvider(create: (context) => TimeBloc()..add(TimeGet())),*/
+          BlocProvider(create: (context) => TimeBloc()..add(TimeGet())),
         ],
         child: Principal(),
       ),*/
