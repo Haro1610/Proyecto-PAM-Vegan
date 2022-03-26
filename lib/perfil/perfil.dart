@@ -1,60 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Platillo extends StatelessWidget {
-  int stars = 6;
-  String name = "Pozole";
-
-  Platillo(int stars, String name) {
-    this.stars = stars;
-    this.name = name;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () {
-        /*
-        BlocProvider.of<TimeBloc>(context).pais = PlatilloName;
-        BlocProvider.of<TimeBloc>(context).add(TimeGet());
-        BlocProvider.of<ImageBloc>(context).add(ImageGet());
-        BlocProvider.of<FraseBloc>(context).add(FraseGet());*/
-      },
-      child: Card(
-        margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 3.0),
-        clipBehavior: Clip.antiAlias,
-        color: Colors.white,
-        elevation: 3.0,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 22.0),
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  children: [
-                    Text(
-                      name,
-                      style: TextStyle(
-                        color: Colors.lightGreen,
-                        fontSize: 22.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 3.0,
-                    ),
-                    _CountStars(stars),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class Perfil extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -66,19 +12,18 @@ class Perfil extends StatelessWidget {
                   gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [Colors.lightGreen, Colors.greenAccent])),
-              height: MediaQuery.of(context).size.height,
+                      colors: [Colors.deepOrange, Colors.pinkAccent])),
               child: Container(
-                margin: EdgeInsets.only(top: 50.0),
                 width: double.infinity,
+                height: 350.0,
                 child: Center(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       CircleAvatar(
                         backgroundImage: NetworkImage(
-                          "https://islam.ru/en/sites/default/files/img/story/2014/02/red-fox2.jpg",
+                          "https://www.trendrr.net/wp-content/uploads/2017/06/Deepika-Padukone-1.jpg",
                         ),
                         radius: 50.0,
                       ),
@@ -86,7 +31,7 @@ class Perfil extends StatelessWidget {
                         height: 10.0,
                       ),
                       Text(
-                        "Iñaki Orozco",
+                        "Natasha",
                         style: TextStyle(
                           fontSize: 22.0,
                           color: Colors.white,
@@ -99,8 +44,8 @@ class Perfil extends StatelessWidget {
                         margin: EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 5.0),
                         clipBehavior: Clip.antiAlias,
-                        color: Colors.green,
-                        elevation: 8.0,
+                        color: Colors.white,
+                        elevation: 5.0,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 8.0, vertical: 22.0),
@@ -110,9 +55,9 @@ class Perfil extends StatelessWidget {
                                 child: Column(
                                   children: [
                                     Text(
-                                      "Recetas",
+                                      "Posts",
                                       style: TextStyle(
-                                        color: Colors.white,
+                                        color: Colors.redAccent,
                                         fontSize: 22.0,
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -124,91 +69,136 @@ class Perfil extends StatelessWidget {
                                       "1200",
                                       style: TextStyle(
                                         fontSize: 20.0,
-                                        color: Colors.white,
+                                        color: Colors.pinkAccent,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "Followers",
+                                      style: TextStyle(
+                                        color: Colors.redAccent,
+                                        fontSize: 22.0,
+                                        fontWeight: FontWeight.bold,
                                       ),
                                     ),
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
+                                    Text(
+                                      "21.2K",
+                                      style: TextStyle(
+                                        fontSize: 20.0,
+                                        color: Colors.pinkAccent,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "Follow",
+                                      style: TextStyle(
+                                        color: Colors.redAccent,
+                                        fontSize: 22.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 5.0,
+                                    ),
+                                    Text(
+                                      "1200",
+                                      style: TextStyle(
+                                        fontSize: 20.0,
+                                        color: Colors.pinkAccent,
+                                      ),
+                                    )
                                   ],
                                 ),
                               ),
                             ],
                           ),
                         ),
-                      ),
-                      Container(
-                          height: 500,
-                          child: ListView(
-                              scrollDirection: Axis.vertical,
-                              children: [
-                                Platillo(3, "Tacos"),
-                                Platillo(4, "Pozole"),
-                                Platillo(5, "Chimichangas"),
-                                Platillo(6, "Gorditas"),
-                                Platillo(0, "Ratatouille"),
-                              ])),
+                      )
                     ],
                   ),
                 ),
               )),
+          Container(
+            child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(vertical: 30.0, horizontal: 16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Info:",
+                    style: TextStyle(
+                        color: Colors.redAccent,
+                        fontStyle: FontStyle.normal,
+                        fontSize: 28.0),
+                  ),
+                  SizedBox(
+                    height: 10.0,
+                  ),
+                  Text(
+                    'My name is Natasha and I am  a freelance mobile app developper.\n'
+                    'Having Experiece in Flutter and Android',
+                    style: TextStyle(
+                      fontSize: 22.0,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w300,
+                      color: Colors.black,
+                      letterSpacing: 2.0,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          SizedBox(
+            height: 20.0,
+          ),
+          Container(
+            width: 300.00,
+            child: RaisedButton(
+                onPressed: () {},
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(80.0)),
+                elevation: 0.0,
+                padding: EdgeInsets.all(0.0),
+                child: Ink(
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                        begin: Alignment.centerRight,
+                        end: Alignment.centerLeft,
+                        colors: [Colors.pink, Colors.pinkAccent]),
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  child: Container(
+                    constraints:
+                        BoxConstraints(maxWidth: 300.0, minHeight: 50.0),
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Contact me",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 26.0,
+                          fontWeight: FontWeight.w300),
+                    ),
+                  ),
+                )),
+          ),
         ],
       ),
     );
-  }
-}
-
-Row _CountStars(int stars) {
-  var starFull = Icon(
-    Icons.star,
-    color: Colors.greenAccent,
-    size: 24.0,
-    semanticLabel: 'Text to announce in accessibility modes',
-  );
-  var starEmpty = Icon(
-    Icons.star_border_outlined,
-    color: Colors.greenAccent,
-    size: 24.0,
-    semanticLabel: 'Text to announce in accessibility modes',
-  );
-  var starGray = Icon(
-    Icons.star,
-    color: Colors.grey,
-    size: 24.0,
-    semanticLabel: 'Text to announce in accessibility modes',
-  );
-  switch (stars) {
-    case 0:
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [starEmpty, starEmpty, starEmpty, starEmpty, starEmpty],
-      );
-    case 1:
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [starFull, starEmpty, starEmpty, starEmpty, starEmpty],
-      );
-    case 2:
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [starFull, starFull, starEmpty, starEmpty, starEmpty],
-      );
-    case 3:
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [starFull, starFull, starFull, starEmpty, starEmpty],
-      );
-    case 4:
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [starFull, starFull, starFull, starFull, starEmpty],
-      );
-    case 5:
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [starFull, starFull, starFull, starFull, starFull],
-      );
-    default:
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [starGray, starGray, starGray, starGray, starGray],
-      );
   }
 }

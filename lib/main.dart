@@ -2,8 +2,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:planternativo/login/login.dart';
 import 'package:planternativo/principal/principal.dart';
-import 'package:planternativo/recetas/recetas.dart';
 import 'package:planternativo/recetaEsp/recetaEsp.dart';
+import 'package:planternativo/recetas/recetas.dart';
+import 'package:planternativo/recetas/recetas.dart';
 import 'package:planternativo/restaurantes/restaurantes.dart';
 import 'package:planternativo/perfil/perfil.dart';
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.purple),
       title: 'Material App',
-      home: Recetas(),
+      home: Restaurantes(),
       /*MultiBlocProvider(
         providers: [
           
