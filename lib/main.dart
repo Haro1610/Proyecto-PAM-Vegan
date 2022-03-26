@@ -19,13 +19,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.purple),
       title: 'Material App',
-      home: Perfil(),
+      home: Recetas(),
       /*MultiBlocProvider(
         providers: [
-          /*
+          
           BlocProvider(create: (context) => FraseBloc()..add(FraseGet())),
           BlocProvider(create: (context) => ImageBloc()..add(ImageGet())),
-          BlocProvider(create: (context) => TimeBloc()..add(TimeGet())),*/
+          BlocProvider(create: (context) => TimeBloc()..add(TimeGet())),
         ],
         child: Principal(),
       ),*/
