@@ -169,7 +169,7 @@ Row _CountStars(int stars) {
     semanticLabel: 'Text to announce in accessibility modes',
   );
   var starGray = Icon(
-    Icons.star_border_outlined,
+    Icons.star,
     color: Colors.grey,
     size: 24.0,
     semanticLabel: 'Text to announce in accessibility modes',

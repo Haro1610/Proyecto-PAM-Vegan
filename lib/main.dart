@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.purple),
       title: 'Material App',
-      home: Perfil(),
+      home: Recetas(),
       /*MultiBlocProvider(
         providers: [
           
