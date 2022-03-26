@@ -1,13 +1,7 @@
 name: planternativo
 description: A new Flutter project.
 
-<<<<<<< HEAD
 publish_to: "none"
-=======
-# The following line prevents the package from being accidentally published to
-# pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: "none" # Remove this line if you wish to publish to pub.dev
->>>>>>> a59de7c9eca2e9479a4b7d391cae3a3cf69ec009
 
 version: 1.0.0+1
 
@@ -17,14 +11,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-<<<<<<< HEAD
-
-=======
-  flutter_bloc:
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
->>>>>>> a59de7c9eca2e9479a4b7d391cae3a3cf69ec009
   cupertino_icons: ^1.0.2
   flutter_bloc: ^8.0.1
 
@@ -35,10 +21,4 @@ dev_dependencies:
   flutter_lints: ^1.0.0
 
 flutter:
-<<<<<<< HEAD
-=======
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
->>>>>>> a59de7c9eca2e9479a4b7d391cae3a3cf69ec009
   uses-material-design: true
