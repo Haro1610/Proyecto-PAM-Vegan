@@ -18,9 +18,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData(primarySwatch: Colors.purple),
+      theme: ThemeData(primarySwatch: Colors.green),
       title: 'Material App',
-      home: Restaurantes(),
+      home: Login(),
       /*MultiBlocProvider(
         providers: [
           
