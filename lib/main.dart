@@ -19,7 +19,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.purple),
       title: 'Material App',
-      home: MultiBlocProvider(
+      home: Perfil(),
+      /*MultiBlocProvider(
         providers: [
           /*
           BlocProvider(create: (context) => FraseBloc()..add(FraseGet())),
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => TimeBloc()..add(TimeGet())),*/
         ],
         child: Principal(),
-      ),
+      ),*/
     );
   }
 }
