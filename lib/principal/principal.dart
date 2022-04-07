@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:planternativo/login/login.dart';
+import 'package:planternativo/perfil/perfil.dart';
 import 'package:planternativo/recetaEsp/recetaEsp.dart';
 import 'package:planternativo/recetaEsp/recetas.dart';
 import 'package:planternativo/recetas/recetas.dart';
@@ -13,15 +15,12 @@ class Principal extends StatefulWidget {
 
 class _PrincipalState extends State<Principal> {
   int _currentPageIndex = 0;
-  final _pagesNameList = [
-    "Inicio",
-    "Restaurantes",
-    "Recetas",
-  ];
+  final _pagesNameList = ["Inicio", "Restaurantes", "Recetas", "Recetas esp"];
   final _pagesList = [
     Center(child: Text("Inicio")),
     Center(child: Text("Restaurantes")),
     Center(child: Text("Recetas")),
+    Center(child: Text("Recetas esp"))
   ];
 
   @override
@@ -33,11 +32,17 @@ class _PrincipalState extends State<Principal> {
             Row(
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => Perfil()));
+                  },
                   icon: Icon(Icons.account_circle_rounded),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (context) => Login()));
+                  },
                   icon: Icon(Icons.logout),
                 ),
               ],
