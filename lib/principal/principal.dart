@@ -5,6 +5,7 @@ import 'package:planternativo/recetaEsp/recetaEsp.dart';
 import 'package:planternativo/recetaEsp/recetas.dart';
 import 'package:planternativo/recetas/recetas.dart';
 import 'package:planternativo/restaurantes/restaurantes.dart';
+import 'package:planternativo/restaurantes/restaurantes.dart';
 
 class Principal extends StatefulWidget {
   Principal({Key? key}) : super(key: key);
@@ -85,8 +86,8 @@ class _PrincipalState extends State<Principal> {
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) => Recetas()));
               } else if (_currentPageIndex == 1) {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => Restaurantes()));
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => MapSample()));
               }
             });
             // Respond to item press.
