@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:planternativo/recetaEsp/recetaEsp.dart';
+import 'package:planternativo/recetaEsp/recetas.dart';
+import 'package:planternativo/recetas/recetas.dart';
+import 'package:planternativo/restaurantes/restaurantes.dart';
 
 class Principal extends StatefulWidget {
   Principal({Key? key}) : super(key: key);
@@ -8,7 +12,7 @@ class Principal extends StatefulWidget {
 }
 
 class _PrincipalState extends State<Principal> {
-  int _currentPageIndex = 1;
+  int _currentPageIndex = 0;
   final _pagesNameList = [
     "Inicio",
     "Restaurantes",
@@ -72,6 +76,13 @@ class _PrincipalState extends State<Principal> {
           onTap: (index) {
             setState(() {
               _currentPageIndex = index;
+              if (_currentPageIndex == 2) {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => Recetas()));
+              } else if (_currentPageIndex == 1) {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => Restaurantes()));
+              }
             });
             // Respond to item press.
           },
