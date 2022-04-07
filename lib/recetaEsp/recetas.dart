@@ -4,14 +4,14 @@ import 'recetasJson.dart';
 
 import 'receta_item.dart';
 
-class Recetas extends StatefulWidget {
-  Recetas({Key? key}) : super(key: key);
+class RecetasEsp extends StatefulWidget {
+  RecetasEsp({Key? key}) : super(key: key);
 
   @override
-  State<Recetas> createState() => _RecetasState();
+  State<RecetasEsp> createState() => _RecetasEspState();
 }
 
-class _RecetasState extends State<Recetas> {
+class _RecetasEspState extends State<RecetasEsp> {
   var url =
       "https://api.sheety.co/f386175add37b57b868d5f8c1f25d7e2/apiParaRecetas/hoja1";
 
