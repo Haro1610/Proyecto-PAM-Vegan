@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.purple),
       title: 'Material App',
-      home: Restaurantes(),
+      home: RecetaEsp(),
       /*MultiBlocProvider(
         providers: [
           
