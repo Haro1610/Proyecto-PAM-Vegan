@@ -6,6 +6,7 @@ import 'package:planternativo/recetaEsp/recetas.dart';
 import 'package:planternativo/recetas/recetas.dart';
 import 'package:planternativo/restaurantes/restaurantes.dart';
 import 'package:planternativo/restaurantes/restaurantes.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class Principal extends StatefulWidget {
   Principal({Key? key}) : super(key: key);
@@ -120,6 +121,7 @@ class _PrincipalState extends State<Principal> {
             () {
               _currentPageIndex = index;
               if (_currentPageIndex == 1) {
+                _checkPermissions();
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) => MapSample()));
               }
@@ -143,5 +145,17 @@ class _PrincipalState extends State<Principal> {
         ],
       ),
     );
+  }
+}
+
+void _checkPermissions() async {
+  var status = await Permission.camera.status;
+  if (status.isDenied) {
+    // We didn't ask for permission yet or the permission has been denied before but not permanently.
+  }
+
+// You can can also directly ask the permission about its status.
+  if (await Permission.location.isRestricted) {
+    // The OS restricts access, for example because of parental controls.
   }
 }
