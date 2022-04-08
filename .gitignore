@@ -46,3 +46,5 @@ app.*.map.json
 /android/app/release
 android/app/google-services.json
 android/app/src/main/AndroidManifest.xml
+windows/flutter/generated_plugin_registrant.cc
+windows/flutter/generated_plugins.cmake
