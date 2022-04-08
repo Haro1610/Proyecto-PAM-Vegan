@@ -6,7 +6,6 @@ import 'package:planternativo/recetaEsp/recetas.dart';
 import 'package:planternativo/recetas/recetas.dart';
 import 'package:planternativo/restaurantes/restaurantes.dart';
 import 'package:planternativo/restaurantes/restaurantes.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class Principal extends StatefulWidget {
   Principal({Key? key}) : super(key: key);
@@ -84,7 +83,6 @@ class _PrincipalState extends State<Principal> {
             setState(() {
               _currentPageIndex = index;
               if (_currentPageIndex == 1) {
-                _checkPermissions();
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) => MapSample()));
               }
@@ -106,17 +104,5 @@ class _PrincipalState extends State<Principal> {
             ),
           ],
         ));
-  }
-}
-
-void _checkPermissions() async {
-  var status = await Permission.location.status;
-  if (status.isDenied) {
-    print("Denied");
-  }
-
-// You can can also directly ask the permission about its status.
-  if (await Permission.location.isRestricted) {
-    print("Restricted");
   }
 }
