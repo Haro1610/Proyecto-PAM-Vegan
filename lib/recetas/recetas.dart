@@ -70,7 +70,97 @@ class Platillo extends StatelessWidget {
 class Recetas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [Colors.lightBlue, Colors.blueAccent],
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 10.0,
+          ),
+          const Text(
+            "Recetas de la semana",
+            style: TextStyle(
+              fontSize: 30.0,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Expanded(
+            child: Container(
+              height: 700,
+              child: ListView(
+                scrollDirection: Axis.vertical,
+                children: [
+                  Platillo(3, "Tacos", "Juan"),
+                  Platillo(4, "Pozole", "Pedro"),
+                  Platillo(5, "Chimichangas", "Alejandra"),
+                  Platillo(6, "Gorditas", "Juan"),
+                  Platillo(0, "Ratatouille", "Roberto"),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+    /*  return Expanded(
+      child: Container(
+        decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [Colors.lightBlue, Colors.blueAccent])),
+        //height: MediaQuery.of(context).size.height,
+        child: Container(
+          margin: EdgeInsets.only(top: 50.0),
+          width: double.infinity,
+          child: Center(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 10.0,
+                ),
+                Text(
+                  "Recetas de la semana",
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Expanded(
+                  child: Container(
+                    height: 700,
+                    child: ListView(
+                      scrollDirection: Axis.vertical,
+                      children: [
+                        Platillo(3, "Tacos", "Juan"),
+                        Platillo(4, "Pozole", "Pedro"),
+                        Platillo(5, "Chimichangas", "Alejandra"),
+                        Platillo(6, "Gorditas", "Juan"),
+                        Platillo(0, "Ratatouille", "Roberto"),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    ); */
+
+    /*    return Scaffold(
       body: Column(
         children: [
           Container(
@@ -121,7 +211,7 @@ class Recetas extends StatelessWidget {
           ),
         ],
       ),
-    );
+    ); */
   }
 }
 
