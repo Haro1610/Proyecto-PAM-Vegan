@@ -24,9 +24,12 @@ class _PrincipalState extends State<Principal> {
     Center(child: Text("Recetas esp"))
   ];
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       /*      appBar: AppBar(
         title: const Text("Inicio"),
         actions: <Widget>[
@@ -119,10 +122,6 @@ class _PrincipalState extends State<Principal> {
           setState(
             () {
               _currentPageIndex = index;
-              if (_currentPageIndex == 1) {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => MapSample()));
-              }
             },
           );
           // Respond to item press.
@@ -142,6 +141,12 @@ class _PrincipalState extends State<Principal> {
           ),
         ],
       ),
+      floatingActionButton: IconButton(
+        icon: Icon(Icons.menu),
+        color: Colors.white,
+        onPressed: () => _scaffoldKey.currentState!.openDrawer(),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
     );
   }
 }

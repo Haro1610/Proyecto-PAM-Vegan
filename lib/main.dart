@@ -18,18 +18,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.green),
       title: 'Material App',
       home: Principal(),
-      /*MultiBlocProvider(
-        providers: [
-          
-          BlocProvider(create: (context) => FraseBloc()..add(FraseGet())),
-          BlocProvider(create: (context) => ImageBloc()..add(ImageGet())),
-          BlocProvider(create: (context) => TimeBloc()..add(TimeGet())),
-        ],
-        child: Principal(),
-      ),*/
     );
   }
 }

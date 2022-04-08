@@ -83,7 +83,7 @@ class Recetas extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           const SizedBox(
-            height: 10.0,
+            height: 70.0,
           ),
           const Text(
             "Recetas de la semana",
@@ -92,6 +92,9 @@ class Recetas extends StatelessWidget {
               color: Colors.white,
               fontWeight: FontWeight.bold,
             ),
+          ),
+          SizedBox(
+            height: 30.0,
           ),
           Expanded(
             child: Container(
