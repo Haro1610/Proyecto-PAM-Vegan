@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:planternativo/auth/bloc/auth_bloc.dart';
 import 'package:planternativo/login/login.dart';
 import 'package:planternativo/perfil/perfil.dart';
 import 'package:planternativo/recetaEsp/recetaEsp.dart';
@@ -98,8 +100,7 @@ class _PrincipalState extends State<Principal> {
               leading: const Icon(Icons.logout),
               title: Text("Cerrar Sesion"),
               onTap: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => Login()));
+                BlocProvider.of<AuthBloc>(context).add(SingOutEvent());
               },
             ),
 

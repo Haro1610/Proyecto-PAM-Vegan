@@ -15,6 +15,16 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   flutter_bloc: ^8.0.1
+  firebase_core:
+  equatable:
+  flutter_shimmer:
+  # Firebase
+  firebase_auth:
+  google_sign_in:
+  cloud_firestore:
+  flutterfire_ui:
+  firebase_storage:
+  image_picker:
 
 dev_dependencies:
   flutter_test:
