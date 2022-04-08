@@ -121,6 +121,7 @@ class _PrincipalState extends State<Principal> {
             () {
               _currentPageIndex = index;
               if (_currentPageIndex == 1) {
+                checkPermissions();
                 Navigator.of(context)
                     .push(MaterialPageRoute(builder: (context) => MapSample()));
               }
@@ -144,5 +145,10 @@ class _PrincipalState extends State<Principal> {
         ],
       ),
     );
+  }
+
+  void checkPermissions() async {
+    var status = await Permission.location.request();
+    print("Status:" + status.toString());
   }
 }
