@@ -5,7 +5,7 @@ import 'package:planternativo/recetaEsp/recetaEsp.dart';
 import 'package:planternativo/recetaEsp/recetas.dart';
 import 'package:planternativo/recetas/recetas.dart';
 import 'package:planternativo/restaurantes/restaurantes.dart';
-import 'package:planternativo/restaurantes/restaurantes.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class Principal extends StatefulWidget {
   Principal({Key? key}) : super(key: key);
