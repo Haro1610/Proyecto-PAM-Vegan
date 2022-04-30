@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:planternativo/auth/bloc/auth_bloc.dart';
 import 'package:planternativo/login/login.dart';
 import 'package:planternativo/perfil/perfil.dart';
