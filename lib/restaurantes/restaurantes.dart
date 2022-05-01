@@ -13,17 +13,17 @@ class MapSample extends StatefulWidget {
 class MapSampleState extends State<MapSample> {
   late GoogleMapController googleMapController;
 
-  static const CameraPosition initialCameraPosition = CameraPosition(
+  static CameraPosition initialMapPosition = CameraPosition(
       target: LatLng(20.665965601910823, -103.3937151456212), zoom: 14);
 
   Set<Marker> markers = {};
 
   @override
   Widget build(BuildContext context) {
-    final _screen = MediaQuery.of(context).size;
+    final _mapScreen = MediaQuery.of(context).size;
     return Scaffold(
       body: GoogleMap(
-        initialCameraPosition: initialCameraPosition,
+        initialCameraPosition: initialMapPosition,
         markers: markers,
         zoomControlsEnabled: false,
         mapType: MapType.normal,
@@ -43,12 +43,12 @@ class MapSampleState extends State<MapSample> {
           markers.clear();
 
           markers.add(Marker(
-              markerId: const MarkerId('currentLocation'),
+              markerId: const MarkerId('Ubicacion'),
               position: LatLng(position.latitude, position.longitude)));
 
           setState(() {});
         },
-        label: const Text("Current Location"),
+        label: const Text("Tu ubicacion"),
         icon: const Icon(Icons.location_history),
       ),
     );
@@ -56,7 +56,7 @@ class MapSampleState extends State<MapSample> {
 
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
-    LocationPermission permission;
+    LocationPermission userPermission;
 
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
 
@@ -64,17 +64,17 @@ class MapSampleState extends State<MapSample> {
       return Future.error('Location services are disabled');
     }
 
-    permission = await Geolocator.checkPermission();
+    userPermission = await Geolocator.checkPermission();
 
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
+    if (userPermission == LocationPermission.denied) {
+      userPermission = await Geolocator.requestPermission();
 
-      if (permission == LocationPermission.denied) {
+      if (userPermission == LocationPermission.denied) {
         return Future.error("Location permission denied");
       }
     }
 
-    if (permission == LocationPermission.deniedForever) {
+    if (userPermission == LocationPermission.deniedForever) {
       return Future.error('Location permissions are permanently denied');
     }
 
