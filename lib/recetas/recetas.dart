@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:planternativo/recetaEsp/recetaEsp.dart';
 
 class Platillo extends StatelessWidget {
   int stars = 6;
@@ -16,6 +18,8 @@ class Platillo extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => RecetasEsp()));
         /*
         BlocProvider.of<TimeBloc>(context).pais = PlatilloName;
         BlocProvider.of<TimeBloc>(context).add(TimeGet());
@@ -34,24 +38,24 @@ class Platillo extends StatelessWidget {
               Expanded(
                 child: Column(
                   children: [
-                    Text(
-                      name,
-                      style: TextStyle(
-                        color: Colors.lightBlue,
-                        fontSize: 22.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    Text(name,
+                        style: GoogleFonts.pacifico(
+                          textStyle: TextStyle(
+                            color: Colors.green,
+                            fontSize: 22.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )),
                     SizedBox(
                       height: 3.0,
                     ),
-                    Text(
-                      "Autor: " + author,
-                      style: TextStyle(
-                        color: Colors.lightBlue,
-                        fontSize: 15.0,
-                      ),
-                    ),
+                    Text("Autor: " + author,
+                        style: GoogleFonts.overpass(
+                          textStyle: TextStyle(
+                            color: Colors.green,
+                            fontSize: 15.0,
+                          ),
+                        )),
                     SizedBox(
                       height: 3.0,
                     ),
@@ -70,32 +74,51 @@ class Platillo extends StatelessWidget {
 class Recetas extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final _screen = MediaQuery.of(context).size;
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
-          colors: [Colors.lightBlue, Colors.blueAccent],
+          colors: [
+            Color.fromARGB(255, 158, 242, 183),
+            Color.fromARGB(255, 37, 138, 56)
+          ],
         ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          const SizedBox(
-            height: 10.0,
-          ),
-          const Text(
-            "Recetas de la semana",
-            style: TextStyle(
-              fontSize: 30.0,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
+          Container(
+            color: Color.fromARGB(255, 1, 61, 3),
+            width: _screen.width,
+            height: 60,
+            child: Align(
+              alignment: Alignment.center,
+              child: Text(
+                "Planternativo",
+                textAlign: TextAlign.center,
+                style: GoogleFonts.pacifico(
+                    textStyle: TextStyle(
+                  fontSize: 30.0,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                )),
+              ),
             ),
           ),
+          Text("Recetas de la semana",
+              style: GoogleFonts.pacifico(
+                textStyle: TextStyle(
+                  fontSize: 30.0,
+                  color: Color.fromARGB(255, 17, 88, 19),
+                  fontWeight: FontWeight.bold,
+                ),
+              )),
           Expanded(
             child: Container(
-              height: 700,
+              height: 0,
               child: ListView(
                 scrollDirection: Axis.vertical,
                 children: [
@@ -117,7 +140,7 @@ class Recetas extends StatelessWidget {
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Colors.lightBlue, Colors.blueAccent])),
+                colors: [Colors.lightgreen, Colors.green])),
         //height: MediaQuery.of(context).size.height,
         child: Container(
           margin: EdgeInsets.only(top: 50.0),
@@ -168,7 +191,7 @@ class Recetas extends StatelessWidget {
                 gradient: LinearGradient(
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
-                    colors: [Colors.lightBlue, Colors.blueAccent])),
+                    colors: [Colors.lightgreen, Colors.green])),
             height: MediaQuery.of(context).size.height,
             child: Container(
               margin: EdgeInsets.only(top: 50.0),
@@ -218,13 +241,13 @@ class Recetas extends StatelessWidget {
 Row _CountStars(int stars) {
   var starFull = Icon(
     Icons.star,
-    color: Colors.blueAccent,
+    color: Colors.green,
     size: 24.0,
     semanticLabel: 'Text to announce in accessibility modes',
   );
   var starEmpty = Icon(
     Icons.star_border_outlined,
-    color: Colors.blueAccent,
+    color: Colors.green,
     size: 24.0,
     semanticLabel: 'Text to announce in accessibility modes',
   );

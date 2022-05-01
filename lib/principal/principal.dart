@@ -5,7 +5,6 @@ import 'package:planternativo/auth/bloc/auth_bloc.dart';
 import 'package:planternativo/login/login.dart';
 import 'package:planternativo/perfil/perfil.dart';
 import 'package:planternativo/recetaEsp/recetaEsp.dart';
-import 'package:planternativo/recetaEsp/recetas.dart';
 import 'package:planternativo/recetas/recetas.dart';
 import 'package:planternativo/restaurantes/restaurantes.dart';
 import 'package:planternativo/restaurantes/restaurantes.dart';
@@ -24,7 +23,6 @@ class _PrincipalState extends State<Principal> {
     Center(child: Text("Inicio")),
     MapSample(),
     Recetas(),
-    Center(child: Text("Recetas esp"))
   ];
 
   @override
@@ -84,7 +82,7 @@ class _PrincipalState extends State<Principal> {
           children: [
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Colors.blue,
+                color: Colors.green,
               ),
               child: Text('Drawer Header '),
             ),
