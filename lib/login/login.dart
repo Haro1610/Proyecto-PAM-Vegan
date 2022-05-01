@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:planternativo/auth/bloc/auth_bloc.dart';
 import 'package:planternativo/principal/principal.dart';
 
@@ -14,63 +16,48 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 255, 255, 255),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text(
-            "Planternativo",
-            style: TextStyle(
-                fontSize: 25,
-                fontStyle: FontStyle.italic,
-                letterSpacing: 5,
-                fontWeight: FontWeight.w800,
-                color: Color.fromARGB(255, 31, 143, 81)),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 25.0),
-            child: Center(
-              child: Container(
-                  width: 400,
-                  height: 240,
-                  child: Image.network(
-                      "https://www.yorokobu.es/wp-content/uploads/2016/11/vegano.jpg")),
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            child: TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Email',
-              ),
-            ),
-          ),
-          const Padding(
-            padding: EdgeInsets.all(10),
-            //padding: EdgeInsets.symmetric(horizontal: 15),
-            child: TextField(
-              obscureText: true,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Password',
+      body: Stack(
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/vegan-vegan-power.gif'),
+                fit: BoxFit.cover,
               ),
             ),
           ),
           Container(
-            height: 50,
-            width: 250,
-            decoration: BoxDecoration(
-                color: Color.fromARGB(255, 27, 155, 15),
-                borderRadius: BorderRadius.circular(20)),
-            child: OutlinedButton(
-              onPressed: () {
-                BlocProvider.of<AuthBloc>(context).add(GoogleAuthEvent());
-              },
-              child: Text(
-                'Login con google',
-                style: TextStyle(color: Colors.white, fontSize: 25),
-              ),
+            decoration: BoxDecoration(color: Color.fromRGBO(0, 0, 0, .9)),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: ListView(
+              children: [
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(height: 150),
+                    Text(
+                      "Planternativo",
+                      style: GoogleFonts.lato(
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontSize: 40,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 400),
+                    SignInButton(
+                      Buttons.Google,
+                      onPressed: () {
+                        BlocProvider.of<AuthBloc>(context)
+                            .add(GoogleAuthEvent());
+                      },
+                    ),
+                  ],
+                )
+              ],
             ),
           ),
         ],

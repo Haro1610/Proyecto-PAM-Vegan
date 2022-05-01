@@ -26,6 +26,8 @@ dependencies:
   flutterfire_ui:
   firebase_storage:
   image_picker:
+  flutter_signin_button: ^2.0.0
+  google_fonts: ^2.3.1
 
 dev_dependencies:
   flutter_test:
@@ -34,4 +36,11 @@ dev_dependencies:
   flutter_lints: ^1.0.0
 
 flutter:
+<<<<<<< HEAD
   uses-material-design: true
+=======
+  uses-material-design: true
+
+  assets:
+    - assets/vegan-vegan-power.gif
+>>>>>>> 5f574e3e9371712295cc499752d3725e438a7715
