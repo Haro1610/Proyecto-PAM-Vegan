@@ -135,7 +135,7 @@ class Perfil extends StatelessWidget {
                         ),
                       ),
                       Container(
-                          height: 500,
+                          height: MediaQuery.of(context).size.height * .61,
                           child: ListView(
                               scrollDirection: Axis.vertical,
                               children: [
