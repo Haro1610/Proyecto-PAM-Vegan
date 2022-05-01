@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:planternativo/auth/bloc/auth_bloc.dart';
 import 'package:planternativo/principal/principal.dart';
 
 class Login extends StatefulWidget {
@@ -63,8 +65,7 @@ class _LoginState extends State<Login> {
                 borderRadius: BorderRadius.circular(20)),
             child: OutlinedButton(
               onPressed: () {
-                Navigator.push(
-                    context, MaterialPageRoute(builder: (_) => Principal()));
+                BlocProvider.of<AuthBloc>(context).add(GoogleAuthEvent());
               },
               child: Text(
                 'Login con google',

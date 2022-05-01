@@ -12,10 +12,20 @@ dependencies:
   flutter:
     sdk: flutter
   google_maps_flutter: ^2.1.3
-  permission:
+  permission_handler: ^9.2.0
 
   cupertino_icons: ^1.0.2
   flutter_bloc: ^8.0.1
+  firebase_core:
+  equatable:
+  flutter_shimmer:
+  # Firebase
+  firebase_auth:
+  google_sign_in:
+  cloud_firestore:
+  flutterfire_ui:
+  firebase_storage:
+  image_picker:
 
 dev_dependencies:
   flutter_test:

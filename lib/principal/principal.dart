@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:planternativo/auth/bloc/auth_bloc.dart';
 import 'package:planternativo/login/login.dart';
 import 'package:planternativo/perfil/perfil.dart';
 import 'package:planternativo/recetaEsp/recetaEsp.dart';
@@ -24,62 +26,11 @@ class _PrincipalState extends State<Principal> {
     Center(child: Text("Recetas esp"))
   ];
 
-  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
-      /*      appBar: AppBar(
-        title: const Text("Inicio"),
-        actions: <Widget>[
-          Row(
-            children: [
-              IconButton(
-                onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => Perfil()));
-                },
-                icon: Icon(Icons.account_circle_rounded),
-              ),
-              IconButton(
-                onPressed: () {
-                  Navigator.of(context)
-                      .push(MaterialPageRoute(builder: (context) => Login()));
-                },
-                icon: Icon(Icons.logout),
-              ),
-            ],
-          )
-        ],
-        flexibleSpace: Container(
-          height: 120,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Colors.green, Color.fromARGB(255, 152, 202, 36)],
-            ),
-          ),
-        ),
-      ), */
-      /*body:  Stack(
-        children: [
-          Card(
-            child: AspectRatio(
-              aspectRatio: 16 / 9,
-              child: Image.network(
-                "https://cdn.kiwilimon.com/recetaimagen/27982/th5-640x640-27850.jpg",
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-        ],
-      ), */
       drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
         child: ListView(
-          // Important: Remove any padding from the ListView.
           padding: EdgeInsets.zero,
           children: [
             const DrawerHeader(
@@ -96,18 +47,13 @@ class _PrincipalState extends State<Principal> {
                     .push(MaterialPageRoute(builder: (context) => Perfil()));
               },
             ),
-
             ListTile(
               leading: const Icon(Icons.logout),
               title: Text("Cerrar Sesion"),
               onTap: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => Login()));
+                BlocProvider.of<AuthBloc>(context).add(SingOutEvent());
               },
             ),
-
-            // Update the state of the app.
-            // ...
           ],
         ),
       ),
@@ -122,9 +68,12 @@ class _PrincipalState extends State<Principal> {
           setState(
             () {
               _currentPageIndex = index;
+              if (_currentPageIndex == 1) {
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => MapSample()));
+              }
             },
           );
-          // Respond to item press.
         },
         items: [
           BottomNavigationBarItem(
@@ -141,12 +90,6 @@ class _PrincipalState extends State<Principal> {
           ),
         ],
       ),
-      floatingActionButton: IconButton(
-        icon: Icon(Icons.menu),
-        color: Colors.white,
-        onPressed: () => _scaffoldKey.currentState!.openDrawer(),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
     );
   }
 }
