@@ -22,9 +22,7 @@ class MapSampleState extends State<MapSample> {
   Widget build(BuildContext context) {
     final _screen = MediaQuery.of(context).size;
     return Scaffold(
-      body:
-          //Wrap(children: [],),
-          GoogleMap(
+      body: GoogleMap(
         initialCameraPosition: initialCameraPosition,
         markers: markers,
         zoomControlsEnabled: false,
