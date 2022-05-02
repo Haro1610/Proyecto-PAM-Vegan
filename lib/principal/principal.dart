@@ -118,7 +118,6 @@ class _PrincipalState extends State<Principal> {
           ),
         ],
       ), */
-
       body: IndexedStack(
         index: _currentPageIndex,
         children: _pagesList,

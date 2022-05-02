@@ -5,6 +5,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:planternativo/auth/bloc/auth_bloc.dart';
 import 'package:planternativo/perfil/perfil.dart';
 import 'package:planternativo/recetaEsp/recetaEsp.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:planternativo/recetas/bloc/crear_bloc.dart';
 
 class Platillo extends StatelessWidget {
   int stars = 6;
@@ -62,7 +64,16 @@ class Platillo extends StatelessWidget {
                     SizedBox(
                       height: 3.0,
                     ),
-                    _CountStars(stars),
+                    RatingBarIndicator(
+                      rating: stars.toDouble(),
+                      itemBuilder: (context, index) => Icon(
+                        Icons.star,
+                        color: Colors.green,
+                      ),
+                      itemCount: 5,
+                      itemSize: 25.0,
+                      direction: Axis.horizontal,
+                    ),
                   ],
                 ),
               ),
@@ -75,6 +86,12 @@ class Platillo extends StatelessWidget {
 }
 
 class Recetas extends StatelessWidget {
+  final _decoracion =
+      BoxDecoration(border: Border.all(color: Colors.blueAccent));
+  TextEditingController _titulo = new TextEditingController();
+  TextEditingController _ingredientes = new TextEditingController();
+  TextEditingController _procedimiento = new TextEditingController();
+  TextEditingController _imagen = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     final _screen = MediaQuery.of(context).size;
@@ -139,16 +156,142 @@ class Recetas extends StatelessWidget {
               ),
             ),
           ),
-          Text("Recetas de la semana",
-              style: GoogleFonts.pacifico(
-                textStyle: TextStyle(
-                  fontSize: 30.0,
-                  color: Color.fromARGB(255, 17, 88, 19),
-                  fontWeight: FontWeight.bold,
+          Text(
+            "Recetas de la semana",
+            style: GoogleFonts.pacifico(
+              textStyle: TextStyle(
+                fontSize: 30.0,
+                color: Color.fromARGB(255, 17, 88, 19),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              showDialog(
+                context: context,
+                barrierDismissible: true,
+                builder: (_) => AlertDialog(
+                  title: Text("Nueva receta"),
+                  content: Wrap(
+                    runSpacing: 18,
+                    spacing: 18,
+                    children: [
+                      TextField(
+                        controller: _titulo,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: "Titulo",
+                        ),
+                      ),
+                      TextField(
+                        controller: _ingredientes,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: "Ingredientes",
+                        ),
+                      ),
+                      TextField(
+                        controller: _procedimiento,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: "Procedimiento",
+                        ),
+                      ),
+                      TextField(
+                        controller: _imagen,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          labelText: "Link Imagen",
+                        ),
+                      ),
+                      /* RatingBar.builder(
+                        initialRating: 3,
+                        minRating: 1,
+                        direction: Axis.horizontal,
+                        allowHalfRating: false,
+                        itemCount: 5,
+                        itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
+                        itemBuilder: (context, _) => Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                        ),
+                        onRatingUpdate: (rating) {
+                          print(rating);
+                        },
+                      ) */
+                    ],
+                  ),
+                  actions: [
+                    Wrap(
+                      children: [
+                        TextButton(
+                          onPressed: () {
+                            Map<String, dynamic> recetaMapa = {};
+                            recetaMapa = {
+                              "nombre": _titulo.value.text,
+                              "ingredientes": _ingredientes.value.text,
+                              "procedimiento": _procedimiento.value.text,
+                              "imagen": _imagen.value.text
+                            };
+                            BlocProvider.of<CrearBloc>(context).add(
+                                OnCrearSaveDataEvent(dataToSave: recetaMapa));
+                          },
+                          child: Text(
+                            "Aceptar",
+                            style: TextStyle(color: Colors.green),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.pop(context, 'Cancelar');
+                          },
+                          child: Text(
+                            "Cancelar",
+                            style: TextStyle(color: Colors.red),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              )),
+              );
+            },
+            child: Card(
+              margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 3.0),
+              clipBehavior: Clip.antiAlias,
+              color: Colors.white,
+              elevation: 6.0,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 22.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Text("Agregar receta",
+                              style: GoogleFonts.pacifico(
+                                textStyle: TextStyle(
+                                  color: Colors.green,
+                                  fontSize: 22.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )),
+                          SizedBox(
+                            height: 3.0,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
           Expanded(
             child: Container(
+              decoration: _decoracion,
               height: 0,
               child: ListView(
                 scrollDirection: Axis.vertical,
@@ -165,164 +308,5 @@ class Recetas extends StatelessWidget {
         ],
       ),
     );
-    /*  return Expanded(
-      child: Container(
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [Colors.lightgreen, Colors.green])),
-        //height: MediaQuery.of(context).size.height,
-        child: Container(
-          margin: EdgeInsets.only(top: 50.0),
-          width: double.infinity,
-          child: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: 10.0,
-                ),
-                Text(
-                  "Recetas de la semana",
-                  style: TextStyle(
-                    fontSize: 30.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Expanded(
-                  child: Container(
-                    height: 700,
-                    child: ListView(
-                      scrollDirection: Axis.vertical,
-                      children: [
-                        Platillo(3, "Tacos", "Juan"),
-                        Platillo(4, "Pozole", "Pedro"),
-                        Platillo(5, "Chimichangas", "Alejandra"),
-                        Platillo(6, "Gorditas", "Juan"),
-                        Platillo(0, "Ratatouille", "Roberto"),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    ); */
-
-    /*    return Scaffold(
-      body: Column(
-        children: [
-          Container(
-            decoration: BoxDecoration(
-                gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [Colors.lightgreen, Colors.green])),
-            height: MediaQuery.of(context).size.height,
-            child: Container(
-              margin: EdgeInsets.only(top: 50.0),
-              width: double.infinity,
-              child: Center(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    Text(
-                      "Recetas de la semana",
-                      style: TextStyle(
-                        fontSize: 30.0,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: 700,
-                        child: ListView(
-                          scrollDirection: Axis.vertical,
-                          children: [
-                            Platillo(3, "Tacos", "Juan"),
-                            Platillo(4, "Pozole", "Pedro"),
-                            Platillo(5, "Chimichangas", "Alejandra"),
-                            Platillo(6, "Gorditas", "Juan"),
-                            Platillo(0, "Ratatouille", "Roberto"),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
-    ); */
-  }
-}
-
-Row _CountStars(int stars) {
-  var starFull = Icon(
-    Icons.star,
-    color: Colors.green,
-    size: 24.0,
-    semanticLabel: 'Text to announce in accessibility modes',
-  );
-  var starEmpty = Icon(
-    Icons.star_border_outlined,
-    color: Colors.green,
-    size: 24.0,
-    semanticLabel: 'Text to announce in accessibility modes',
-  );
-  var starGray = Icon(
-    Icons.star,
-    color: Colors.grey,
-    size: 24.0,
-    semanticLabel: 'Text to announce in accessibility modes',
-  );
-  switch (stars) {
-    case 0:
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [starEmpty, starEmpty, starEmpty, starEmpty, starEmpty],
-      );
-    case 1:
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [starFull, starEmpty, starEmpty, starEmpty, starEmpty],
-      );
-    case 2:
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [starFull, starFull, starEmpty, starEmpty, starEmpty],
-      );
-    case 3:
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [starFull, starFull, starFull, starEmpty, starEmpty],
-      );
-    case 4:
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [starFull, starFull, starFull, starFull, starEmpty],
-      );
-    case 5:
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [starFull, starFull, starFull, starFull, starFull],
-      );
-    default:
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [starGray, starGray, starGray, starGray, starGray],
-      );
   }
 }
