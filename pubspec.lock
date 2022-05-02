@@ -490,8 +490,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
-<<<<<<< HEAD
-=======
   path_provider:
     dependency: transitive
     description:
@@ -541,7 +539,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.5"
->>>>>>> 5f574e3e9371712295cc499752d3725e438a7715
   permission_handler:
     dependency: "direct main"
     description:
@@ -584,8 +581,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.4.0"
-<<<<<<< HEAD
-=======
   platform:
     dependency: transitive
     description:
@@ -593,7 +588,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.0"
->>>>>>> 5f574e3e9371712295cc499752d3725e438a7715
   plugin_platform_interface:
     dependency: transitive
     description:

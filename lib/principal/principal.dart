@@ -30,18 +30,6 @@ class _PrincipalState extends State<Principal> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-<<<<<<< HEAD
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text('Drawer Header'),
-            ),
-=======
       /*      appBar: AppBar(
         title: const Text("Inicio"),
         actions: <Widget>[
@@ -100,7 +88,6 @@ class _PrincipalState extends State<Principal> {
               ),
               child: Text('Drawer Header '),
             ),
->>>>>>> 5f574e3e9371712295cc499752d3725e438a7715
             ListTile(
               leading: const Icon(Icons.account_circle_rounded),
               title: Text("Mi perfil"),
@@ -116,12 +103,9 @@ class _PrincipalState extends State<Principal> {
                 BlocProvider.of<AuthBloc>(context).add(SingOutEvent());
               },
             ),
-<<<<<<< HEAD
-=======
 
             // Update the state of the app.
             // ...
->>>>>>> 5f574e3e9371712295cc499752d3725e438a7715
           ],
         ),
       ),
@@ -143,10 +127,7 @@ class _PrincipalState extends State<Principal> {
               }
             },
           );
-<<<<<<< HEAD
-=======
           // Respond to item press.
->>>>>>> 5f574e3e9371712295cc499752d3725e438a7715
         },
         items: [
           BottomNavigationBarItem(
@@ -164,13 +145,10 @@ class _PrincipalState extends State<Principal> {
         ],
       ),
     );
-<<<<<<< HEAD
-=======
   }
 
   void checkPermissions() async {
     var status = await Permission.location.request();
     print("Status:" + status.toString());
->>>>>>> 5f574e3e9371712295cc499752d3725e438a7715
   }
 }
