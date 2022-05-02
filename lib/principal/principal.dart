@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:planternativo/auth/bloc/auth_bloc.dart';
 import 'package:planternativo/login/login.dart';
 import 'package:planternativo/perfil/perfil.dart';
 import 'package:planternativo/recetaEsp/recetaEsp.dart';
-import 'package:planternativo/recetaEsp/recetas.dart';
 import 'package:planternativo/recetas/recetas.dart';
 import 'package:planternativo/restaurantes/restaurantes.dart';
 import 'package:planternativo/restaurantes/restaurantes.dart';
@@ -20,15 +20,59 @@ class Principal extends StatefulWidget {
 class _PrincipalState extends State<Principal> {
   int _currentPageIndex = 0;
   final _pagesNameList = ["Inicio", "Restaurantes", "Recetas", "Recetas esp"];
-  final _pagesList = [
-    Center(child: Text("Inicio")),
-    MapSample(),
-    Recetas(),
-    Center(child: Text("Recetas esp"))
-  ];
 
   @override
   Widget build(BuildContext context) {
+    final _screen = MediaQuery.of(context).size;
+    final _pagesList = [
+      Container(
+        color: Color.fromARGB(255, 1, 61, 3),
+        width: _screen.width,
+        height: 100,
+        child: Align(
+          alignment: Alignment.center,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 40,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.of(context).push(
+                          MaterialPageRoute(builder: (context) => Perfil()));
+                    },
+                    icon: Icon(Icons.account_circle_rounded),
+                    color: Colors.green,
+                  ),
+                  Text(
+                    "Planternativo",
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.pacifico(
+                        textStyle: TextStyle(
+                      fontSize: 30.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    )),
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      BlocProvider.of<AuthBloc>(context).add(SingOutEvent());
+                    },
+                    icon: Icon(Icons.logout),
+                    color: Colors.green,
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+      MapSample(),
+      Recetas(),
+    ];
     return Scaffold(
       /*      appBar: AppBar(
         title: const Text("Inicio"),
@@ -74,41 +118,6 @@ class _PrincipalState extends State<Principal> {
           ),
         ],
       ), */
-      drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the drawer if there isn't enough vertical
-        // space to fit everything.
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: [
-            const DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text('Drawer Header '),
-            ),
-            ListTile(
-              leading: const Icon(Icons.account_circle_rounded),
-              title: Text("Mi perfil"),
-              onTap: () {
-                Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => Perfil()));
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.logout),
-              title: Text("Cerrar Sesion"),
-              onTap: () {
-                BlocProvider.of<AuthBloc>(context).add(SingOutEvent());
-              },
-            ),
-
-            // Update the state of the app.
-            // ...
-          ],
-        ),
-      ),
       body: IndexedStack(
         index: _currentPageIndex,
         children: _pagesList,

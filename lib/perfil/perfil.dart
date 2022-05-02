@@ -1,19 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../recetaEsp/recetaEsp.dart';
 
 class Platillo extends StatelessWidget {
   int stars = 6;
   String name = "Pozole";
+  String author = "Iñaki";
 
-  Platillo(int stars, String name) {
+  Platillo(int stars, String name, String author) {
     this.stars = stars;
     this.name = name;
+    this.author = author;
   }
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => RecetasEsp()));
         /*
         BlocProvider.of<TimeBloc>(context).pais = PlatilloName;
         BlocProvider.of<TimeBloc>(context).add(TimeGet());
@@ -24,7 +31,7 @@ class Platillo extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 3.0),
         clipBehavior: Clip.antiAlias,
         color: Colors.white,
-        elevation: 3.0,
+        elevation: 6.0,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 22.0),
           child: Row(
@@ -32,14 +39,24 @@ class Platillo extends StatelessWidget {
               Expanded(
                 child: Column(
                   children: [
-                    Text(
-                      name,
-                      style: TextStyle(
-                        color: Colors.lightGreen,
-                        fontSize: 22.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Text(name,
+                        style: GoogleFonts.pacifico(
+                          textStyle: TextStyle(
+                            color: Color.fromARGB(255, 93, 144, 100),
+                            fontSize: 22.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        )),
+                    SizedBox(
+                      height: 3.0,
                     ),
+                    Text("Autor: " + author,
+                        style: GoogleFonts.overpass(
+                          textStyle: TextStyle(
+                            color: Color.fromARGB(255, 93, 144, 100),
+                            fontSize: 15.0,
+                          ),
+                        )),
                     SizedBox(
                       height: 3.0,
                     ),
@@ -58,6 +75,11 @@ class Platillo extends StatelessWidget {
 class Perfil extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var _imagenPerfil = NetworkImage(
+      "https://islam.ru/en/sites/default/files/img/story/2014/02/red-fox2.jpg",
+    );
+    String _recetasCant = "1200";
+    String _autor = "Iñaki Orozco";
     return Scaffold(
       body: Column(
         children: [
@@ -66,10 +88,13 @@ class Perfil extends StatelessWidget {
                   gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [Colors.lightGreen, Colors.greenAccent])),
+                      colors: [
+                    Color.fromARGB(255, 35, 129, 13),
+                    Color.fromARGB(255, 93, 144, 100)
+                  ])),
               height: MediaQuery.of(context).size.height,
               child: Container(
-                margin: EdgeInsets.only(top: 50.0),
+                margin: EdgeInsets.only(top: 20.0),
                 width: double.infinity,
                 child: Center(
                   child: Column(
@@ -77,21 +102,19 @@ class Perfil extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       CircleAvatar(
-                        backgroundImage: NetworkImage(
-                          "https://islam.ru/en/sites/default/files/img/story/2014/02/red-fox2.jpg",
-                        ),
+                        backgroundImage: _imagenPerfil,
                         radius: 50.0,
                       ),
                       SizedBox(
                         height: 10.0,
                       ),
-                      Text(
-                        "Iñaki Orozco",
-                        style: TextStyle(
-                          fontSize: 22.0,
-                          color: Colors.white,
-                        ),
-                      ),
+                      Text(_autor,
+                          style: GoogleFonts.overpass(
+                            textStyle: TextStyle(
+                              fontSize: 20.0,
+                              color: Colors.white,
+                            ),
+                          )),
                       SizedBox(
                         height: 10.0,
                       ),
@@ -109,24 +132,24 @@ class Perfil extends StatelessWidget {
                               Expanded(
                                 child: Column(
                                   children: [
-                                    Text(
-                                      "Recetas",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 22.0,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
+                                    Text("Recetas",
+                                        style: GoogleFonts.overpass(
+                                          textStyle: TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20.0,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        )),
                                     SizedBox(
                                       height: 5.0,
                                     ),
-                                    Text(
-                                      "1200",
-                                      style: TextStyle(
-                                        fontSize: 20.0,
-                                        color: Colors.white,
-                                      ),
-                                    ),
+                                    Text(_recetasCant,
+                                        style: GoogleFonts.overpass(
+                                          textStyle: TextStyle(
+                                            fontSize: 19.0,
+                                            color: Colors.white,
+                                          ),
+                                        )),
                                   ],
                                 ),
                               ),
@@ -135,15 +158,15 @@ class Perfil extends StatelessWidget {
                         ),
                       ),
                       Container(
-                          height: 500,
+                          height: MediaQuery.of(context).size.height * .65,
                           child: ListView(
                               scrollDirection: Axis.vertical,
                               children: [
-                                Platillo(3, "Tacos"),
-                                Platillo(4, "Pozole"),
-                                Platillo(5, "Chimichangas"),
-                                Platillo(6, "Gorditas"),
-                                Platillo(0, "Ratatouille"),
+                                Platillo(3, "Tacos", "Iñaki"),
+                                Platillo(4, "Pozole", "Iñaki"),
+                                Platillo(5, "Chimichangas", "Iñaki"),
+                                Platillo(6, "Gorditas", "Iñaki"),
+                                Platillo(0, "Ratatouille", "Iñaki"),
                               ])),
                     ],
                   ),
@@ -158,13 +181,13 @@ class Perfil extends StatelessWidget {
 Row _CountStars(int stars) {
   var starFull = Icon(
     Icons.star,
-    color: Colors.greenAccent,
+    color: Color.fromARGB(255, 93, 144, 100),
     size: 24.0,
     semanticLabel: 'Text to announce in accessibility modes',
   );
   var starEmpty = Icon(
     Icons.star_border_outlined,
-    color: Colors.greenAccent,
+    color: Color.fromARGB(255, 93, 144, 100),
     size: 24.0,
     semanticLabel: 'Text to announce in accessibility modes',
   );
