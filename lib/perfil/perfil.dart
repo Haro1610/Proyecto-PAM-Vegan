@@ -42,7 +42,7 @@ class Platillo extends StatelessWidget {
                     Text(name,
                         style: GoogleFonts.pacifico(
                           textStyle: TextStyle(
-                            color: Colors.green,
+                            color: Color.fromARGB(255, 93, 144, 100),
                             fontSize: 22.0,
                             fontWeight: FontWeight.bold,
                           ),
@@ -53,7 +53,7 @@ class Platillo extends StatelessWidget {
                     Text("Autor: " + author,
                         style: GoogleFonts.overpass(
                           textStyle: TextStyle(
-                            color: Colors.green,
+                            color: Color.fromARGB(255, 93, 144, 100),
                             fontSize: 15.0,
                           ),
                         )),
@@ -88,7 +88,10 @@ class Perfil extends StatelessWidget {
                   gradient: LinearGradient(
                       begin: Alignment.topCenter,
                       end: Alignment.bottomCenter,
-                      colors: [Colors.lightGreen, Colors.greenAccent])),
+                      colors: [
+                    Color.fromARGB(255, 35, 129, 13),
+                    Color.fromARGB(255, 93, 144, 100)
+                  ])),
               height: MediaQuery.of(context).size.height,
               child: Container(
                 margin: EdgeInsets.only(top: 20.0),
@@ -178,13 +181,13 @@ class Perfil extends StatelessWidget {
 Row _CountStars(int stars) {
   var starFull = Icon(
     Icons.star,
-    color: Colors.greenAccent,
+    color: Color.fromARGB(255, 93, 144, 100),
     size: 24.0,
     semanticLabel: 'Text to announce in accessibility modes',
   );
   var starEmpty = Icon(
     Icons.star_border_outlined,
-    color: Colors.greenAccent,
+    color: Color.fromARGB(255, 93, 144, 100),
     size: 24.0,
     semanticLabel: 'Text to announce in accessibility modes',
   );
