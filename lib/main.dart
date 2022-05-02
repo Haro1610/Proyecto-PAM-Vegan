@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:planternativo/auth/bloc/auth_bloc.dart';
 import 'package:planternativo/login/login.dart';
 import 'package:planternativo/principal/principal.dart';
+import 'package:planternativo/recetas/bloc/crear_bloc.dart';
 
 //Bloc
 
@@ -16,6 +17,7 @@ void main() async {
       BlocProvider(
         create: ((context) => AuthBloc()..add(VerifyAuthEvent())),
       ),
+      BlocProvider(create: ((context) => CrearBloc()))
     ],
     child: MyApp(),
   ));
@@ -25,6 +27,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.green),
       title: 'Material App',
       home: BlocConsumer<AuthBloc, AuthState>(
@@ -42,15 +45,6 @@ class MyApp extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         },
       ),
-      /*MultiBlocProvider(
-        providers: [
-          
-          BlocProvider(create: (context) => FraseBloc()..add(FraseGet())),
-          BlocProvider(create: (context) => ImageBloc()..add(ImageGet())),
-          BlocProvider(create: (context) => TimeBloc()..add(TimeGet())),
-        ],
-        child: Principal(),
-      ),*/
     );
   }
 }

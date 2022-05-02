@@ -37,21 +37,26 @@ class UserAuthRepository {
     final firebaseToken = await user.getIdToken();
     print("user fcm token:${firebaseToken}");
 
+    await _createUserCollectionFirebase(
+        _auth.currentUser!.uid, googleUser.displayName);
+
     //crear un documento en la tabla en users y agregar el valor de fotolistId
     //await _CreateUserCollectionFirebase(_auth.currentUser!.uid);
   }
 
-  // Future<void> _CreateUserCollectionFirebase(String uid) async {
-  //   var userDoc =
-  //       await FirebaseFirestore.instance.collection("users").doc(uid).get();
-  //   if (!userDoc.exists) {
-  //     await FirebaseFirestore.instance.collection("users").doc(uid).set(
-  //       {
-  //         "fotolistId": [],
-  //       },
-  //     );
-  //   } else {
-  //     return;
-  //   }
-  // }
+  Future<void> _createUserCollectionFirebase(
+      String uid, String? username) async {
+    var userDoc =
+        await FirebaseFirestore.instance.collection("users").doc(uid).get();
+    // Si no existe el doc, lo crea con valor default
+    if (!userDoc.exists) {
+      await FirebaseFirestore.instance
+          .collection("users")
+          .doc(uid)
+          .set({"username": username, "recetas": []});
+    } else {
+      // Si ya existe el doc, pues chido, return
+      return;
+    }
+  }
 }

@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -20,6 +19,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   FutureOr<void> _authVerification(event, emit) {
     // inicializar los datos de la app
+
     if (_authRepo.isAlreadyAuthenticated()) {
       emit(AuthSuccesState());
     } else {
