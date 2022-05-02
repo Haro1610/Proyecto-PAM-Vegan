@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:planternativo/auth/bloc/auth_bloc.dart';
 import 'package:planternativo/login/login.dart';
 import 'package:planternativo/principal/principal.dart';
+import 'package:planternativo/recetas/bloc/crear_bloc.dart';
 
 //Bloc
 
@@ -16,6 +17,7 @@ void main() async {
       BlocProvider(
         create: ((context) => AuthBloc()..add(VerifyAuthEvent())),
       ),
+      BlocProvider(create: ((context) => CrearBloc()))
     ],
     child: MyApp(),
   ));
