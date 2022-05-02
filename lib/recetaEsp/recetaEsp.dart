@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:planternativo/perfil/perfil.dart';
+
+import '../auth/bloc/auth_bloc.dart';
 
 class RecetasEsp extends StatelessWidget {
   int _numberOfStars = -1;
@@ -33,18 +37,46 @@ class RecetasEsp extends StatelessWidget {
             Container(
               color: Color.fromARGB(255, 1, 61, 3),
               width: _screen.width,
-              height: 60,
+              height: 100,
               child: Align(
                 alignment: Alignment.center,
-                child: Text(
-                  "Planternativo",
-                  textAlign: TextAlign.center,
-                  style: GoogleFonts.pacifico(
-                      textStyle: TextStyle(
-                    fontSize: 30.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  )),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 40,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => Perfil()));
+                          },
+                          icon: Icon(Icons.account_circle_rounded),
+                          color: Colors.green,
+                        ),
+                        Text(
+                          "Planternativo",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.pacifico(
+                              textStyle: TextStyle(
+                            fontSize: 30.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          )),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            BlocProvider.of<AuthBloc>(context)
+                                .add(SingOutEvent());
+                          },
+                          icon: Icon(Icons.logout),
+                          color: Colors.green,
+                        )
+                      ],
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -125,7 +157,7 @@ class RecetasEsp extends StatelessWidget {
                 ),
                 Container(
                   width: _screen.width * 0.95,
-                  height: _screen.height * 0.45,
+                  height: _screen.height * 0.4,
                   child: Card(
                     shape: null,
                     elevation: 6,
