@@ -19,15 +19,18 @@ class _LoginState extends State<Login> {
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/vegan-vegan-power.gif'),
-                fit: BoxFit.cover,
-              ),
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: Column(
+              children: [
+                SizedBox(height: 150),
+                Image.asset('assets/download.gif')
+              ],
             ),
+            decoration: BoxDecoration(color: Color.fromRGBO(255, 222, 0, 1)),
           ),
           Container(
-            decoration: BoxDecoration(color: Color.fromRGBO(0, 0, 0, .9)),
+            decoration: BoxDecoration(color: Color.fromRGBO(0, 0, 0, .8)),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -39,7 +42,7 @@ class _LoginState extends State<Login> {
                     // SizedBox(height: 150),
                     Text(
                       "Planternativo",
-                      style: GoogleFonts.lato(
+                      style: GoogleFonts.pacifico(
                         textStyle: TextStyle(
                           color: Colors.white,
                           fontSize: 40,
@@ -47,9 +50,9 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                     ),
-                    //SizedBox(height: 400),
+                    SizedBox(height: 200),
                     Container(
-                      height: MediaQuery.of(context).size.width,
+                      height: 300,
                       width: 200,
                       child: Material(
                         elevation: 8.0,
