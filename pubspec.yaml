@@ -45,5 +45,6 @@ flutter:
   uses-material-design: true
 
   assets:
+    - assets/
     - assets/vegan-vegan-power.gif
     - assets/menu/
