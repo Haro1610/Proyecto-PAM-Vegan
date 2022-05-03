@@ -36,7 +36,7 @@ class _LoginState extends State<Login> {
                 Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    SizedBox(height: 150),
+                    // SizedBox(height: 150),
                     Text(
                       "Planternativo",
                       style: GoogleFonts.lato(
@@ -47,7 +47,16 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 400),
+                    //SizedBox(height: 400),
+                    Container(
+                      height: MediaQuery.of(context).size.width,
+                      width: 200,
+                      child: Material(
+                        elevation: 8.0,
+                        shape: CircleBorder(),
+                        child: Image.asset("assets/logo.png"),
+                      ),
+                    ),
                     SignInButton(
                       Buttons.Google,
                       onPressed: () {
