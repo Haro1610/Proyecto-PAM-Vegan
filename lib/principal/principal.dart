@@ -30,7 +30,7 @@ class _PrincipalState extends State<Principal> {
         "https://www.sabrosia.pr/resizer/U8dw60E4ucVskb2IH5vRcWVWlvw=/1440x0/filters:format(jpg):quality(70)/cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/JDPCVRO6AFGATNQHEVA4EFZCTA.jpg";
     ;
     String _noticias =
-        "¿Que putas chingadas madres dijiste de mí, pinche escuincle baboso? para que sepas yo entrené en el gimnasio del señor Julio Cesar Chavez, tengo un record de 50 knockouts, fui al colegio militar de la ciudad de México y un doctorado en ingenieria nuclear, ¿sabes que significa eso? que pudo volar tu pinche cabecita hueca con una bomba que estoy preparando especialmente para tí, y no sólo eso tambien onions experto en el manejo de armas largas y tengo acceso a todo un arsenal de Uzis AK 47 y R-15s, si tan solo hubieras pensado un poquito más y no hubieras abierto el pinche hocico de perro que tienes, no tendrías que rezar por tu vida. En estos momentos estoy rastreando tu direción IP para ubicar tu domicilio, te vas cagar cuando veas un chingo de camionetas esperando en la entrada de tu casa para acriibillarte. Mis hombres estan bien armados y son muy temerarios, saben hacer muy bien su trabajo y están dispuestos a exterminar hasta la ultima puta celúla más pequeña e insignificantede tu puta miserable existencia, escucha bien mis palabras nene, que ya no hay vuelta atrás, vete despidiendo de tu miserable existencia, escucha bien mis palabras nene, que ya no hay vuelta atrás, vete despidiendo de tu miserable vida cabrón, voy a convertir tus ultimas horas de vida en un autentico infierno, estas bien pinche muerto nene, estas bien pinche muerto.";
+        "Bienvenido a nuestra app, iremos actualizándola conforme pase el tiempo!";
     var _pagesList = [
       Column(
         children: [
@@ -150,7 +150,64 @@ class _PrincipalState extends State<Principal> {
                 ),
                 ElevatedButton.icon(
                   onPressed: () {
-                    //Navigation
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Scaffold(
+                                appBar: AppBar(
+                                    title: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Text(
+                                      "Menú",
+                                      style: GoogleFonts.pacifico(
+                                          textStyle: TextStyle(
+                                        fontSize: 30.0,
+                                        color:
+                                            Color.fromARGB(255, 255, 255, 255),
+                                        fontWeight: FontWeight.bold,
+                                      )),
+                                    ),
+                                  ],
+                                )),
+                                body: Center(
+                                    child: Column(children: [
+                                  Expanded(
+                                      child: Container(
+                                    child: ListView(
+                                      scrollDirection: Axis.vertical,
+                                      children: [
+                                        Image(
+                                            image: AssetImage(
+                                                'assets/menu/1.png')),
+                                        Image(
+                                            image: AssetImage(
+                                                'assets/menu/2.png')),
+                                        Image(
+                                            image: AssetImage(
+                                                'assets/menu/3.png')),
+                                        Image(
+                                            image: AssetImage(
+                                                'assets/menu/4.png')),
+                                        Image(
+                                            image: AssetImage(
+                                                'assets/menu/5.png')),
+                                        Image(
+                                            image: AssetImage(
+                                                'assets/menu/6.png')),
+                                        Image(
+                                            image: AssetImage(
+                                                'assets/menu/7.png')),
+                                        Image(
+                                            image: AssetImage(
+                                                'assets/menu/8.png')),
+                                      ],
+                                    ),
+                                  )),
+                                ])),
+                              )),
+                    );
                   },
                   icon: Icon(Icons.book),
                   label: Text("Menú online"),
@@ -201,16 +258,7 @@ class _PrincipalState extends State<Principal> {
       ),
       MapSample(),
       Recetas(),
-    ]; /*
-      return Scaffold(
-        body: new Image.network(
-          "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fi.ytimg.com%2Fvi%2Fxy_buTCrpy8%2Fhqdefault.jpg&f=1&nofb=1",
-          fit: BoxFit.cover,
-          height: double.infinity,
-          width: double.infinity,
-          alignment: Alignment.center,
-        ),
-      );*/
+    ];
     return Scaffold(
       body: IndexedStack(
         index: _currentPageIndex,
