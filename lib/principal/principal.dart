@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -21,7 +22,6 @@ class Principal extends StatefulWidget {
 class _PrincipalState extends State<Principal> {
   int _currentPageIndex = 0;
   final _pagesNameList = ["Inicio", "Restaurantes", "Recetas", "Recetas esp"];
-
   @override
   Widget build(BuildContext context) {
     final _screen = MediaQuery.of(context).size;
@@ -29,8 +29,6 @@ class _PrincipalState extends State<Principal> {
     String _imagen =
         "https://www.sabrosia.pr/resizer/U8dw60E4ucVskb2IH5vRcWVWlvw=/1440x0/filters:format(jpg):quality(70)/cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/JDPCVRO6AFGATNQHEVA4EFZCTA.jpg";
     ;
-    String _noticias =
-        "Bienvenido a nuestra app, iremos actualizándola conforme pase el tiempo!";
     var _pagesList = [
       Column(
         children: [
@@ -107,11 +105,17 @@ class _PrincipalState extends State<Principal> {
                   flex: 1,
                   child: SingleChildScrollView(
                     scrollDirection: Axis.vertical,
-                    child: Text(_noticias,
-                        style: GoogleFonts.overpass(
-                            textStyle: TextStyle(
-                          fontSize: 18,
-                        ))),
+                    child: FutureBuilder(
+                        future: getNews(),
+                        initialData: "Loading text..",
+                        builder:
+                            (BuildContext context, AsyncSnapshot<String> text) {
+                          return Text(text.data!,
+                              style: GoogleFonts.overpass(
+                                  textStyle: TextStyle(
+                                fontSize: 18,
+                              )));
+                        }),
                   ),
                 ),
               ),
@@ -301,4 +305,17 @@ class _PrincipalState extends State<Principal> {
 void checkPermissions() async {
   var status = await Permission.location.request();
   print("Status:" + status.toString());
+}
+
+Future<String> getNews() async {
+  var collection = FirebaseFirestore.instance.collection('noticias');
+  var docSnapshot = await collection.doc('DOfX6Vl9FyJtXkP3d2EK').get();
+  if (docSnapshot.exists) {
+    Map<String, dynamic>? data = docSnapshot.data();
+    String value = data?['news'];
+    print("Valor: $value");
+    return value;
+  } else {
+    return "Error";
+  }
 }
