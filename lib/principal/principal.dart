@@ -313,7 +313,6 @@ Future<String> getNews() async {
   if (docSnapshot.exists) {
     Map<String, dynamic>? data = docSnapshot.data();
     String value = data?['news'];
-    print("Valor: $value");
     return value;
   } else {
     return "Error";

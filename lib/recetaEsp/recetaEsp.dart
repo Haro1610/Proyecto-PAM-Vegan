@@ -1,12 +1,20 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:planternativo/perfil/perfil.dart';
 
+import 'package:path_provider/path_provider.dart';
+import 'package:screenshot/screenshot.dart';
+import 'package:share_plus/share_plus.dart';
+
 import '../auth/bloc/auth_bloc.dart';
 
 class RecetasEsp extends StatelessWidget {
+  final screenShotController = ScreenshotController();
   int _numberOfStars = -1;
   String _titulo = "Hamburguesa Vegana";
   String _descripcion =
@@ -83,14 +91,27 @@ class RecetasEsp extends StatelessWidget {
             SizedBox(
               height: 15,
             ),
-            Text(
-              _titulo,
-              style: GoogleFonts.pacifico(
-                  textStyle: TextStyle(
-                fontSize: 30.0,
-                color: Color.fromARGB(255, 2, 54, 4),
-                fontWeight: FontWeight.bold,
-              )),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                    onPressed: () async {
+                      double pixelRatio =
+                          MediaQuery.of(context).devicePixelRatio;
+                      _storeAndShare((await screenShotController.capture(
+                          pixelRatio: pixelRatio))!);
+                    },
+                    icon: Icon(Icons.share)),
+                Text(
+                  _titulo,
+                  style: GoogleFonts.pacifico(
+                      textStyle: TextStyle(
+                    fontSize: 30.0,
+                    color: Color.fromARGB(255, 2, 54, 4),
+                    fontWeight: FontWeight.bold,
+                  )),
+                ),
+              ],
             ),
             SizedBox(
               height: 10,
@@ -179,6 +200,18 @@ class RecetasEsp extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future _storeAndShare(Uint8List bytes) async {
+    ///Store Plugin
+    print("hola");
+    final directory = await getApplicationDocumentsDirectory();
+    final imagePath = await File('${directory.path}/img.png').create();
+    await imagePath.writeAsBytes(bytes);
+    print(imagePath);
+
+    /// Share Plugin
+    await Share.shareFiles([imagePath.path]);
   }
 }
 
