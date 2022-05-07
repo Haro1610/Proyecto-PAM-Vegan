@@ -1,10 +1,18 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../recetaEsp/recetaEsp.dart';
-import 'bloc/picture_bloc.dart';
+
+class Perfil extends StatefulWidget {
+  Perfil({Key? key}) : super(key: key);
+
+  @override
+  State<Perfil> createState() => PerfilState();
+}
 
 class Platillo extends StatelessWidget {
   int stars = 6;
@@ -74,12 +82,11 @@ class Platillo extends StatelessWidget {
   }
 }
 
-class Perfil extends StatelessWidget {
+class PerfilState extends State<Perfil> {
   @override
   Widget build(BuildContext context) {
-    var _imagenPerfil = NetworkImage(
-      "https://islam.ru/en/sites/default/files/img/story/2014/02/red-fox2.jpg",
-    );
+    File? _imagenPerfil;
+    bool _imageCon = true;
     String _recetasCant = "1200";
     String _autor = "Iñaki Orozco";
     return Scaffold(
@@ -104,13 +111,17 @@ class Perfil extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       GestureDetector(
-                        onTap: () {
-                          BlocProvider.of<PictureBloc>(context).add(
-                            ChangeImageEvent(),
-                          );
+                        onTap: () async {
+                          setState(() async {
+                            _imageCon = false;
+                            _imagenPerfil = await _pickImage();
+                          });
                         },
                         child: CircleAvatar(
-                          backgroundImage: _imagenPerfil,
+                          backgroundImage: _imageCon
+                              ? NetworkImage(
+                                  "https://islam.ru/en/sites/default/files/img/story/2014/02/red-fox2.jpg")
+                              : _imagenPerfil as ImageProvider,
                           radius: 50.0,
                         ),
                       ),
@@ -184,6 +195,17 @@ class Perfil extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<File?> _pickImage() async {
+    final picker = ImagePicker();
+    final XFile? chosenImage = await picker.pickImage(
+      source: ImageSource.camera,
+      maxHeight: 720,
+      maxWidth: 720,
+      imageQuality: 85,
+    );
+    return chosenImage != null ? File(chosenImage.path) : null;
   }
 }
 
