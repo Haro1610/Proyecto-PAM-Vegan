@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../recetaEsp/recetaEsp.dart';
+import 'bloc/picture_bloc.dart';
 
 class Platillo extends StatelessWidget {
   int stars = 6;
@@ -101,9 +103,16 @@ class Perfil extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      CircleAvatar(
-                        backgroundImage: _imagenPerfil,
-                        radius: 50.0,
+                      GestureDetector(
+                        onTap: () {
+                          BlocProvider.of<PictureBloc>(context).add(
+                            ChangeImageEvent(),
+                          );
+                        },
+                        child: CircleAvatar(
+                          backgroundImage: _imagenPerfil,
+                          radius: 50.0,
+                        ),
                       ),
                       SizedBox(
                         height: 10.0,
