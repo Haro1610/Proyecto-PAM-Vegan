@@ -14,7 +14,7 @@ import 'package:share_plus/share_plus.dart';
 import '../auth/bloc/auth_bloc.dart';
 
 class RecetasEsp extends StatelessWidget {
-  final screenShotController = ScreenshotController();
+  ScreenshotController screenshotController = ScreenshotController();
   int _numberOfStars = -1;
   String _titulo = "Hamburguesa Vegana";
   String _descripcion =
@@ -27,176 +27,180 @@ class RecetasEsp extends StatelessWidget {
   Widget build(BuildContext context) {
     final _screen = MediaQuery.of(context).size;
     return Material(
-      child: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color.fromARGB(255, 128, 185, 63),
-              Color.fromARGB(255, 5, 139, 34)
-            ],
-          ),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Container(
-              color: Color.fromARGB(255, 1, 61, 3),
-              width: _screen.width,
-              height: 100,
-              child: Align(
-                alignment: Alignment.center,
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: 40,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => Perfil()));
-                          },
-                          icon: Icon(Icons.account_circle_rounded),
-                          color: Colors.green,
-                        ),
-                        Text(
-                          "Planternativo",
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.pacifico(
-                              textStyle: TextStyle(
-                            fontSize: 30.0,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          )),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            BlocProvider.of<AuthBloc>(context)
-                                .add(SingOutEvent());
-                          },
-                          icon: Icon(Icons.logout),
-                          color: Colors.green,
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                    onPressed: () async {
-                      double pixelRatio =
-                          MediaQuery.of(context).devicePixelRatio;
-                      _storeAndShare((await screenShotController.capture(
-                          pixelRatio: pixelRatio))!);
-                    },
-                    icon: Icon(Icons.share)),
-                Text(
-                  _titulo,
-                  style: GoogleFonts.pacifico(
-                      textStyle: TextStyle(
-                    fontSize: 30.0,
-                    color: Color.fromARGB(255, 2, 54, 4),
-                    fontWeight: FontWeight.bold,
-                  )),
-                ),
+      child: Screenshot(
+        controller: screenshotController,
+        child: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color.fromARGB(255, 128, 185, 63),
+                Color.fromARGB(255, 5, 139, 34)
               ],
             ),
-            SizedBox(
-              height: 10,
-            ),
-            Column(
-              children: [
-                Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                  Container(
-                    width: _screen.width * 0.45,
-                    height: _screen.height * 0.3,
-                    child: Card(
-                      shape: null,
-                      elevation: 5,
-                      child: Padding(
-                        padding: EdgeInsets.all(16),
-                        child: Expanded(
-                          flex: 1,
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.vertical,
-                            child: Text(_ingredientes,
-                                style: GoogleFonts.overpass(
-                                    textStyle: TextStyle(
-                                  fontSize: 12,
-                                ))),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Column(
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                color: Color.fromARGB(255, 1, 61, 3),
+                width: _screen.width,
+                height: 100,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Column(
                     children: [
-                      _CountStars(_numberOfStars),
-                      Container(
-                        height: 200,
-                        width: 200,
-                        child: Card(
-                          semanticContainer: true,
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          child: Image.network(
-                            _imagen,
-                            fit: BoxFit.fill,
+                      SizedBox(
+                        height: 40,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          IconButton(
+                            onPressed: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => Perfil()));
+                            },
+                            icon: Icon(Icons.account_circle_rounded),
+                            color: Colors.green,
                           ),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
+                          Text(
+                            "Planternativo",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.pacifico(
+                                textStyle: TextStyle(
+                              fontSize: 30.0,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            )),
                           ),
-                          elevation: 5,
-                          margin: EdgeInsets.all(10),
-                        ),
+                          IconButton(
+                            onPressed: () {
+                              BlocProvider.of<AuthBloc>(context)
+                                  .add(SingOutEvent());
+                            },
+                            icon: Icon(Icons.logout),
+                            color: Colors.green,
+                          )
+                        ],
                       ),
                     ],
-                  )
-                ]),
-                SizedBox(
-                  height: 10,
+                  ),
                 ),
-                Text(
-                  "Proceso:",
-                  style: GoogleFonts.pacifico(
-                      textStyle: TextStyle(
-                          color: Color.fromARGB(255, 1, 52, 3), fontSize: 20)),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  width: _screen.width * 0.95,
-                  height: _screen.height * 0.4,
-                  child: Card(
-                    shape: null,
-                    elevation: 6,
-                    child: Expanded(
-                      flex: 1,
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  IconButton(
+                      onPressed: () async {
+                        double pixelRatio =
+                            MediaQuery.of(context).devicePixelRatio;
+                        _storeAndShare((await screenshotController.capture(
+                            pixelRatio: pixelRatio))!);
+                      },
+                      icon: Icon(Icons.share)),
+                  Text(
+                    _titulo,
+                    style: GoogleFonts.pacifico(
+                        textStyle: TextStyle(
+                      fontSize: 30.0,
+                      color: Color.fromARGB(255, 2, 54, 4),
+                      fontWeight: FontWeight.bold,
+                    )),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Column(
+                children: [
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    Container(
+                      width: _screen.width * 0.45,
+                      height: _screen.height * 0.3,
+                      child: Card(
+                        shape: null,
+                        elevation: 5,
                         child: Padding(
-                            padding: EdgeInsets.all(16),
-                            child: Text(_descripcion,
-                                style: GoogleFonts.overpass())),
+                          padding: EdgeInsets.all(16),
+                          child: Expanded(
+                            flex: 1,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.vertical,
+                              child: Text(_ingredientes,
+                                  style: GoogleFonts.overpass(
+                                      textStyle: TextStyle(
+                                    fontSize: 12,
+                                  ))),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Column(
+                      children: [
+                        _CountStars(_numberOfStars),
+                        Container(
+                          height: 200,
+                          width: 200,
+                          child: Card(
+                            semanticContainer: true,
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            child: Image.network(
+                              _imagen,
+                              fit: BoxFit.fill,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            elevation: 5,
+                            margin: EdgeInsets.all(10),
+                          ),
+                        ),
+                      ],
+                    )
+                  ]),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "Proceso:",
+                    style: GoogleFonts.pacifico(
+                        textStyle: TextStyle(
+                            color: Color.fromARGB(255, 1, 52, 3),
+                            fontSize: 20)),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    width: _screen.width * 0.95,
+                    height: _screen.height * 0.4,
+                    child: Card(
+                      shape: null,
+                      elevation: 6,
+                      child: Expanded(
+                        flex: 1,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: Padding(
+                              padding: EdgeInsets.all(16),
+                              child: Text(_descripcion,
+                                  style: GoogleFonts.overpass())),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            )
-          ],
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
