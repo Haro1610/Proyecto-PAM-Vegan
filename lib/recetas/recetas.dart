@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:planternativo/auth/bloc/auth_bloc.dart';
 import 'package:planternativo/perfil/perfil.dart';
 import 'package:planternativo/recetaEsp/recetaEsp.dart';
@@ -205,12 +208,16 @@ class Recetas extends StatelessWidget {
                           labelText: "Procedimiento",
                         ),
                       ),
-                      TextField(
-                        controller: _imagen,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: "Link Imagen",
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                              onPressed: () async {
+                                File? _imagen = await _pickImage();
+                                //_imagen debe guardarse en firebase
+                              },
+                              child: Text("Elegir imagen")),
+                        ],
                       ),
                       /* RatingBar.builder(
                         initialRating: 3,
@@ -315,5 +322,16 @@ class Recetas extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<File?> _pickImage() async {
+    final picker = ImagePicker();
+    final XFile? chosenImage = await picker.pickImage(
+      source: ImageSource.camera,
+      maxHeight: 720,
+      maxWidth: 720,
+      imageQuality: 85,
+    );
+    return chosenImage != null ? File(chosenImage.path) : null;
   }
 }

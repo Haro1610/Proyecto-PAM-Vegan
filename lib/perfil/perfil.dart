@@ -110,20 +110,13 @@ class PerfilState extends State<Perfil> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      GestureDetector(
-                        onTap: () async {
-                          setState(() async {
-                            _imageCon = false;
-                            _imagenPerfil = await _pickImage();
-                          });
-                        },
-                        child: CircleAvatar(
-                          backgroundImage: _imageCon
-                              ? NetworkImage(
-                                  "https://islam.ru/en/sites/default/files/img/story/2014/02/red-fox2.jpg")
-                              : _imagenPerfil as ImageProvider,
-                          radius: 50.0,
-                        ),
+                      CircleAvatar(
+                        //si hay una imagen en la cuenta de google se debe importar aquí
+                        backgroundImage: _imageCon
+                            ? NetworkImage(
+                                "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvignette.wikia.nocookie.net%2Fjacksepticeye%2Fimages%2Ff%2Ff6%2FCLICK_HERE_TO_CHANGE_YOUR_LIFE_image.jpg%2Frevision%2Flatest%3Fcb%3D20180311211255&f=1&nofb=1")
+                            : _imagenPerfil as ImageProvider,
+                        radius: 50.0,
                       ),
                       SizedBox(
                         height: 10.0,
@@ -195,17 +188,6 @@ class PerfilState extends State<Perfil> {
         ],
       ),
     );
-  }
-
-  Future<File?> _pickImage() async {
-    final picker = ImagePicker();
-    final XFile? chosenImage = await picker.pickImage(
-      source: ImageSource.camera,
-      maxHeight: 720,
-      maxWidth: 720,
-      imageQuality: 85,
-    );
-    return chosenImage != null ? File(chosenImage.path) : null;
   }
 }
 
