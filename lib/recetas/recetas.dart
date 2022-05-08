@@ -92,6 +92,7 @@ class Recetas extends StatelessWidget {
   TextEditingController _titulo = new TextEditingController();
   TextEditingController _ingredientes = new TextEditingController();
   TextEditingController _procedimiento = new TextEditingController();
+  var _imagen;
   @override
   Widget build(BuildContext context) {
     final _screen = MediaQuery.of(context).size;
@@ -212,7 +213,7 @@ class Recetas extends StatelessWidget {
                         children: [
                           ElevatedButton(
                               onPressed: () async {
-                                File? _imagen = await _pickImage();
+                                _imagen = await _pickImage();
                                 //_imagen debe guardarse en firebase
                               },
                               child: Text("Elegir imagen")),
@@ -234,6 +235,7 @@ class Recetas extends StatelessWidget {
                             };
                             BlocProvider.of<CrearBloc>(context).add(
                                 OnCrearSaveDataEvent(dataToSave: recetaMapa));
+                            Navigator.pop(context, 'Cancelar');
                           },
                           child: Text(
                             "Aceptar",
