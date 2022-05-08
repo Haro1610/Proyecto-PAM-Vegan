@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutterfire_ui/firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:planternativo/auth/bloc/auth_bloc.dart';
@@ -19,6 +21,7 @@ class Principal extends StatefulWidget {
 }
 
 class _PrincipalState extends State<Principal> {
+  //final docRef = db.collection("cities").doc("SF");
   int _currentPageIndex = 0;
   final _pagesNameList = ["Inicio", "Restaurantes", "Recetas", "Recetas esp"];
 
@@ -297,6 +300,20 @@ class _PrincipalState extends State<Principal> {
     );
   }
 }
+
+// const snapshot =  FirebaseFirestore.instance.collection('events').get();
+//     sn = snapshot.docs.map(doc => doc.data());
+
+// Future<List<DocumentSnapshot>> getSuggestion(String suggestion) =>
+//   FirebaseFirestore.instance
+//       .collection('your-collection')
+//       .orderBy('your-document')
+//       .startAt([searchkey])
+//       .endAt([searchkey + '\uf8ff'])
+//       .getDocuments()
+//       .then((snapshot) {
+//         return snapshot.documents;
+//       });
 
 void checkPermissions() async {
   var status = await Permission.location.request();
