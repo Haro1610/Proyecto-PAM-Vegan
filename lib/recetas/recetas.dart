@@ -92,7 +92,6 @@ class Recetas extends StatelessWidget {
   TextEditingController _titulo = new TextEditingController();
   TextEditingController _ingredientes = new TextEditingController();
   TextEditingController _procedimiento = new TextEditingController();
-  TextEditingController _imagen = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     final _screen = MediaQuery.of(context).size;
@@ -219,21 +218,6 @@ class Recetas extends StatelessWidget {
                               child: Text("Elegir imagen")),
                         ],
                       ),
-                      /* RatingBar.builder(
-                        initialRating: 3,
-                        minRating: 1,
-                        direction: Axis.horizontal,
-                        allowHalfRating: false,
-                        itemCount: 5,
-                        itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                        itemBuilder: (context, _) => Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                        ),
-                        onRatingUpdate: (rating) {
-                          print(rating);
-                        },
-                      ) */
                     ],
                   ),
                   actions: [
@@ -246,7 +230,7 @@ class Recetas extends StatelessWidget {
                               "nombre": _titulo.value.text,
                               "ingredientes": _ingredientes.value.text,
                               "procedimiento": _procedimiento.value.text,
-                              "imagen": _imagen.value.text
+                              "imagen": _imagen,
                             };
                             BlocProvider.of<CrearBloc>(context).add(
                                 OnCrearSaveDataEvent(dataToSave: recetaMapa));

@@ -103,7 +103,10 @@ class RecetasEsp extends StatelessWidget {
                         _storeAndShare((await screenshotController.capture(
                             pixelRatio: pixelRatio))!);
                       },
-                      icon: Icon(Icons.share)),
+                      icon: Icon(
+                        Icons.share,
+                        color: Color.fromARGB(255, 255, 255, 255),
+                      )),
                   Text(
                     _titulo,
                     style: GoogleFonts.pacifico(

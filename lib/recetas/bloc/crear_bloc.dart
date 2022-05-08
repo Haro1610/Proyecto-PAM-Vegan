@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:html';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
@@ -8,8 +9,10 @@ part 'crear_event.dart';
 part 'crear_state.dart';
 
 class CrearBloc extends Bloc<CrearEvent, CrearState> {
+  File? _selectedPicture;
   CrearBloc() : super(CrearInitial()) {
     on<OnCrearSaveDataEvent>(_saveData);
+    on<OnCrearFotoEvent>(_tomarFoto);
   }
 
   FutureOr<void> _saveData(event, emit) async {
