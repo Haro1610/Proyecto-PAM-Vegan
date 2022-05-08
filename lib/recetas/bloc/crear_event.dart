@@ -18,3 +18,5 @@ class OnCrearSaveDataEvent extends CrearEvent {
   @override
   List<Object> get props => [dataToSave];
 }
+
+class OnCrearFotoEvent extends CrearEvent {}

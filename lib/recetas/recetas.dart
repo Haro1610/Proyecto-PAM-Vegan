@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:planternativo/auth/bloc/auth_bloc.dart';
 import 'package:planternativo/perfil/perfil.dart';
 import 'package:planternativo/recetaEsp/recetaEsp.dart';
@@ -12,19 +15,33 @@ class Platillo extends StatelessWidget {
   int stars = 6;
   String name = "Pozole";
   String author = "Juan";
+  String ingredients = "Chile";
+  String image = "";
+  String description = "Echale mucho";
 
-  Platillo(int stars, String name, String author) {
+  Platillo(int stars, String name, String author, String ingredients,
+      String image, String description) {
     this.stars = stars;
     this.name = name;
     this.author = author;
+    this.ingredients = ingredients;
+    this.image = image;
+    this.description = description;
   }
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => RecetasEsp()));
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => RecetasEsp({
+                  "stars": stars,
+                  "name": name,
+                  "author": author,
+                  "ingredients": ingredients,
+                  "image": image,
+                  "description": description
+                })));
         /*
         BlocProvider.of<TimeBloc>(context).pais = PlatilloName;
         BlocProvider.of<TimeBloc>(context).add(TimeGet());
@@ -91,7 +108,7 @@ class Recetas extends StatelessWidget {
   TextEditingController _titulo = new TextEditingController();
   TextEditingController _ingredientes = new TextEditingController();
   TextEditingController _procedimiento = new TextEditingController();
-  TextEditingController _imagen = new TextEditingController();
+  var _imagen;
   @override
   Widget build(BuildContext context) {
     final _screen = MediaQuery.of(context).size;
@@ -198,28 +215,17 @@ class Recetas extends StatelessWidget {
                           labelText: "Procedimiento",
                         ),
                       ),
-                      TextField(
-                        controller: _imagen,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: "Link Imagen",
-                        ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                              onPressed: () async {
+                                _imagen = await _pickImage();
+                                //_imagen debe guardarse en firebase
+                              },
+                              child: Text("Elegir imagen")),
+                        ],
                       ),
-                      /* RatingBar.builder(
-                        initialRating: 3,
-                        minRating: 1,
-                        direction: Axis.horizontal,
-                        allowHalfRating: false,
-                        itemCount: 5,
-                        itemPadding: EdgeInsets.symmetric(horizontal: 4.0),
-                        itemBuilder: (context, _) => Icon(
-                          Icons.star,
-                          color: Colors.amber,
-                        ),
-                        onRatingUpdate: (rating) {
-                          print(rating);
-                        },
-                      ) */
                     ],
                   ),
                   actions: [
@@ -232,10 +238,11 @@ class Recetas extends StatelessWidget {
                               "nombre": _titulo.value.text,
                               "ingredientes": _ingredientes.value.text,
                               "procedimiento": _procedimiento.value.text,
-                              "imagen": _imagen.value.text
+                              "imagen": _imagen,
                             };
                             BlocProvider.of<CrearBloc>(context).add(
                                 OnCrearSaveDataEvent(dataToSave: recetaMapa));
+                            Navigator.pop(context, 'Cancelar');
                           },
                           child: Text(
                             "Aceptar",
@@ -296,11 +303,13 @@ class Recetas extends StatelessWidget {
               child: ListView(
                 scrollDirection: Axis.vertical,
                 children: [
-                  Platillo(3, "Tacos", "Juan"),
-                  Platillo(4, "Pozole", "Pedro"),
-                  Platillo(5, "Chimichangas", "Alejandra"),
-                  Platillo(6, "Gorditas", "Juan"),
-                  Platillo(0, "Ratatouille", "Roberto"),
+                  Platillo(
+                      3,
+                      "name",
+                      "author",
+                      "ingredients",
+                      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvignette.wikia.nocookie.net%2Fjacksepticeye%2Fimages%2Ff%2Ff6%2FCLICK_HERE_TO_CHANGE_YOUR_LIFE_image.jpg%2Frevision%2Flatest%3Fcb%3D20180311211255&f=1&nofb=1",
+                      "description"),
                 ],
               ),
             ),
@@ -308,5 +317,16 @@ class Recetas extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<File?> _pickImage() async {
+    final picker = ImagePicker();
+    final XFile? chosenImage = await picker.pickImage(
+      source: ImageSource.camera,
+      maxHeight: 720,
+      maxWidth: 720,
+      imageQuality: 85,
+    );
+    return chosenImage != null ? File(chosenImage.path) : null;
   }
 }

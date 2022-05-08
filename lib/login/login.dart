@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:planternativo/auth/bloc/auth_bloc.dart';
-import 'package:planternativo/principal/principal.dart';
 
 class Login extends StatefulWidget {
   Login({Key? key}) : super(key: key);

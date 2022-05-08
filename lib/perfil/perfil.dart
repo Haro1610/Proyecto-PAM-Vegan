@@ -1,26 +1,50 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../recetaEsp/recetaEsp.dart';
+
+class Perfil extends StatefulWidget {
+  Perfil({Key? key}) : super(key: key);
+
+  @override
+  State<Perfil> createState() => PerfilState();
+}
 
 class Platillo extends StatelessWidget {
   int stars = 6;
   String name = "Pozole";
   String author = "Iñaki";
+  String ingredients = "Chile";
+  String image = "";
+  String description = "Echale mucho";
 
-  Platillo(int stars, String name, String author) {
+  Platillo(int stars, String name, String author, String ingredients,
+      String image, String description) {
     this.stars = stars;
     this.name = name;
     this.author = author;
+    this.ingredients = ingredients;
+    this.image = image;
+    this.description = description;
   }
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => RecetasEsp()));
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => RecetasEsp({
+                  "stars": stars,
+                  "name": name,
+                  "author": author,
+                  "ingredients": ingredients,
+                  "image": image,
+                  "description": description
+                })));
         /*
         BlocProvider.of<TimeBloc>(context).pais = PlatilloName;
         BlocProvider.of<TimeBloc>(context).add(TimeGet());
@@ -72,12 +96,11 @@ class Platillo extends StatelessWidget {
   }
 }
 
-class Perfil extends StatelessWidget {
+class PerfilState extends State<Perfil> {
   @override
   Widget build(BuildContext context) {
-    var _imagenPerfil = NetworkImage(
-      "https://islam.ru/en/sites/default/files/img/story/2014/02/red-fox2.jpg",
-    );
+    File? _imagenPerfil;
+    bool _imageCon = true;
     String _recetasCant = "1200";
     String _autor = "Iñaki Orozco";
     return Scaffold(
@@ -102,7 +125,11 @@ class Perfil extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       CircleAvatar(
-                        backgroundImage: _imagenPerfil,
+                        //si hay una imagen en la cuenta de google se debe importar aquí
+                        backgroundImage: _imageCon
+                            ? NetworkImage(
+                                "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvignette.wikia.nocookie.net%2Fjacksepticeye%2Fimages%2Ff%2Ff6%2FCLICK_HERE_TO_CHANGE_YOUR_LIFE_image.jpg%2Frevision%2Flatest%3Fcb%3D20180311211255&f=1&nofb=1")
+                            : _imagenPerfil as ImageProvider,
                         radius: 50.0,
                       ),
                       SizedBox(
@@ -162,11 +189,13 @@ class Perfil extends StatelessWidget {
                           child: ListView(
                               scrollDirection: Axis.vertical,
                               children: [
-                                Platillo(3, "Tacos", "Iñaki"),
-                                Platillo(4, "Pozole", "Iñaki"),
-                                Platillo(5, "Chimichangas", "Iñaki"),
-                                Platillo(6, "Gorditas", "Iñaki"),
-                                Platillo(0, "Ratatouille", "Iñaki"),
+                                Platillo(
+                                    3,
+                                    "name",
+                                    "author",
+                                    "ingredients",
+                                    "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvignette.wikia.nocookie.net%2Fjacksepticeye%2Fimages%2Ff%2Ff6%2FCLICK_HERE_TO_CHANGE_YOUR_LIFE_image.jpg%2Frevision%2Flatest%3Fcb%3D20180311211255&f=1&nofb=1",
+                                    "description"),
                               ])),
                     ],
                   ),

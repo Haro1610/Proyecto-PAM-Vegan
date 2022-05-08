@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 part 'crear_event.dart';
 part 'crear_state.dart';
@@ -19,16 +21,16 @@ class CrearBloc extends Bloc<CrearEvent, CrearState> {
   }
 
   Future<bool> _saveReceta(Map<String, dynamic> dataToSave) async {
-    Map<String, dynamic> mapaReceta = {};
-    mapaReceta["#reseñas"] = 0;
-    mapaReceta["autor"] = FirebaseAuth.instance.currentUser!.uid;
-    mapaReceta["imagen"] = dataToSave["imagen"];
-    mapaReceta["nombre"] = dataToSave["nombre"];
-    mapaReceta["stars"] = 0;
-    mapaReceta["procedimiento"] = dataToSave["procedimiento"];
-    mapaReceta["ingredientes"] = dataToSave["ingredientes"];
-
     try {
+      String _imgUrl = await _loadPictureToStorage(dataToSave["imagen"]);
+      Map<String, dynamic> mapaReceta = {};
+      mapaReceta["#reseñas"] = 0;
+      mapaReceta["autor"] = FirebaseAuth.instance.currentUser!.uid;
+      mapaReceta["imagen"] = _imgUrl;
+      mapaReceta["nombre"] = dataToSave["nombre"];
+      mapaReceta["stars"] = 0;
+      mapaReceta["procedimiento"] = dataToSave["procedimiento"];
+      mapaReceta["ingredientes"] = dataToSave["ingredientes"];
       var docRef = await FirebaseFirestore.instance
           .collection("recetas")
           .add(mapaReceta);
@@ -64,6 +66,25 @@ class CrearBloc extends Bloc<CrearEvent, CrearState> {
     } catch (e) {
       print("Error al actualizar users collection: $e");
       return false;
+    }
+  }
+
+  Future<String> _loadPictureToStorage(var imagen) async {
+    try {
+      var stamp = DateTime.now();
+      if (imagen == null) return "";
+
+//definir upload task
+      UploadTask task = FirebaseStorage.instance
+          .ref("planternativo/imagen_${stamp}.png")
+          .putFile(imagen!);
+      // ejecutar la task
+      await task;
+      return await task.storage
+          .ref("planternativo/imagen_${stamp}.png")
+          .getDownloadURL();
+    } catch (e) {
+      return "";
     }
   }
 }
