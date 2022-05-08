@@ -234,8 +234,16 @@ class _PrincipalState extends State<Principal> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => RecetasEsp()));
+                    //NECESITAMOS TENER UNA RECETA SIN HARDCODEAR PENDEJOS ESTÚPIDOS
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => RecetasEsp({
+                              "stars": 3,
+                              "name": "nombre",
+                              "author": "juan",
+                              "ingredients": "chile",
+                              "image": "pichulin",
+                              "description": "descricion"
+                            })));
                   },
                   child: Container(
                     height: 200,

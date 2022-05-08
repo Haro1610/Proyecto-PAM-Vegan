@@ -15,19 +15,33 @@ class Platillo extends StatelessWidget {
   int stars = 6;
   String name = "Pozole";
   String author = "Juan";
+  String ingredients = "Chile";
+  String image = "";
+  String description = "Echale mucho";
 
-  Platillo(int stars, String name, String author) {
+  Platillo(int stars, String name, String author, String ingredients,
+      String image, String description) {
     this.stars = stars;
     this.name = name;
     this.author = author;
+    this.ingredients = ingredients;
+    this.image = image;
+    this.description = description;
   }
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (context) => RecetasEsp()));
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => RecetasEsp({
+                  "stars": stars,
+                  "name": name,
+                  "author": author,
+                  "ingredients": ingredients,
+                  "image": image,
+                  "description": description
+                })));
         /*
         BlocProvider.of<TimeBloc>(context).pais = PlatilloName;
         BlocProvider.of<TimeBloc>(context).add(TimeGet());
@@ -296,11 +310,13 @@ class Recetas extends StatelessWidget {
               child: ListView(
                 scrollDirection: Axis.vertical,
                 children: [
-                  Platillo(3, "Tacos", "Juan"),
-                  Platillo(4, "Pozole", "Pedro"),
-                  Platillo(5, "Chimichangas", "Alejandra"),
-                  Platillo(6, "Gorditas", "Juan"),
-                  Platillo(0, "Ratatouille", "Roberto"),
+                  Platillo(
+                      3,
+                      "name",
+                      "author",
+                      "ingredients",
+                      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvignette.wikia.nocookie.net%2Fjacksepticeye%2Fimages%2Ff%2Ff6%2FCLICK_HERE_TO_CHANGE_YOUR_LIFE_image.jpg%2Frevision%2Flatest%3Fcb%3D20180311211255&f=1&nofb=1",
+                      "description"),
                 ],
               ),
             ),

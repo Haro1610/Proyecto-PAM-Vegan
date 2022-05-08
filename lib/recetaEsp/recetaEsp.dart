@@ -14,8 +14,10 @@ import 'package:share_plus/share_plus.dart';
 import '../auth/bloc/auth_bloc.dart';
 
 class RecetasEsp extends StatelessWidget {
+  RecetasEsp(this.data);
+  final Map<String, dynamic> data;
   ScreenshotController screenshotController = ScreenshotController();
-  int _numberOfStars = -1;
+  /*int _numberOfStars = data["stars"];
   String _titulo = "Hamburguesa Vegana";
   String _descripcion =
       "La receta de la hamburguesa vegana se comienza triturando muy bien las lentejas previamente cocidas de manera tal que quede una consistencia pastosa.\n Una vez procesadas, mezcla las lentejas con el perejil, la zanahoria el ajo y el ajo y el pan rallado. Asegúrate de que todos los ingredientes se encentren bien integrados. Posteriormente, lleva la mezcla a la heladera durante media hora.\n Pasado el tiempo recomendado, retira la mezcla de la nevera y sepárala en porciones. Cada porción, debes amasarla, hacer pequeñas bolas y luego aplastarlas de manera que queden en la misma forma que una carne de hamburguesas.\n Luego debes pasarla por pan rallado y en un sartén con poco aceite para terminar de darles la consistencia adecuada. Ahora corta los panes de hamburguesa y rellena cada uno con las ruedas de lentejas, acompañadas por tomate, lechuga, cebolla y todos los vegetales que requieres. ¡Ya están listas para servir! ¡Buen provecho! JFDLASÑJDFASLJFASÑLJFAKSÑJFASKÑFJKADSLKFJASÑFJASKÑLJFDASÑLFJDASKÑLFKJADSÑFJASDFKJASDÑFJASKÑFJASDKFÑASJFÑASDJFÑASDJFASJ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
@@ -23,6 +25,7 @@ class RecetasEsp extends StatelessWidget {
       "* ¼ kg de lentejas cocidas \n* 2 cucharadas de perejil picado \n* 1 diente de ajo pisado \n* 4 cucharadas de zanahoria rallada muy fina \n* 2 cucharadas de cebolla rehogada \n* 4 cucharadas de galletas de salvado molidas o pan rallado \n* Aceite de oliva \n* Pan rallado";
   String _imagen =
       "https://www.sabrosia.pr/resizer/U8dw60E4ucVskb2IH5vRcWVWlvw=/1440x0/filters:format(jpg):quality(70)/cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/JDPCVRO6AFGATNQHEVA4EFZCTA.jpg";
+*/
   @override
   Widget build(BuildContext context) {
     final _screen = MediaQuery.of(context).size;
@@ -105,10 +108,10 @@ class RecetasEsp extends StatelessWidget {
                       },
                       icon: Icon(
                         Icons.share,
-                        color: Color.fromARGB(255, 255, 255, 255),
+                        color: Color.fromARGB(255, 2, 54, 4),
                       )),
                   Text(
-                    _titulo,
+                    data["name"],
                     style: GoogleFonts.pacifico(
                         textStyle: TextStyle(
                       fontSize: 30.0,
@@ -136,7 +139,7 @@ class RecetasEsp extends StatelessWidget {
                             flex: 1,
                             child: SingleChildScrollView(
                               scrollDirection: Axis.vertical,
-                              child: Text(_ingredientes,
+                              child: Text(data["ingredients"],
                                   style: GoogleFonts.overpass(
                                       textStyle: TextStyle(
                                     fontSize: 12,
@@ -148,7 +151,7 @@ class RecetasEsp extends StatelessWidget {
                     ),
                     Column(
                       children: [
-                        _CountStars(_numberOfStars),
+                        _CountStars(data["stars"]),
                         Container(
                           height: 200,
                           width: 200,
@@ -156,7 +159,7 @@ class RecetasEsp extends StatelessWidget {
                             semanticContainer: true,
                             clipBehavior: Clip.antiAliasWithSaveLayer,
                             child: Image.network(
-                              _imagen,
+                              data["image"],
                               fit: BoxFit.fill,
                             ),
                             shape: RoundedRectangleBorder(
@@ -194,7 +197,7 @@ class RecetasEsp extends StatelessWidget {
                           scrollDirection: Axis.vertical,
                           child: Padding(
                               padding: EdgeInsets.all(16),
-                              child: Text(_descripcion,
+                              child: Text(data["description"],
                                   style: GoogleFonts.overpass())),
                         ),
                       ),
