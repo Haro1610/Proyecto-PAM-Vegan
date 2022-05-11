@@ -14,14 +14,18 @@ import '../auth/bloc/auth_bloc.dart';
 class Stars {
   bool rated = false;
 
-  int _updateStars(int stars) {
-    print(rated);
+  double _updateStars(int stars, int global) {
     if (!rated) {
+      double calificacion = 0.0;
       rated = true;
-      //aquí debemos actualizar la información sumando a las estrellas de la receta y luego promediando entre todas las calificaciones
-      return stars;
+      if (global == 0) {
+        calificacion = stars.toDouble();
+      } else {
+        calificacion = (stars + global) / 2;
+      }
+      print(calificacion);
+      return calificacion;
     }
-
     return -1;
   }
 
@@ -51,27 +55,27 @@ class Stars {
           children: [
             GestureDetector(
                 onTap: () {
-                  _updateStars(1);
+                  _updateStars(1, stars);
                 },
                 child: starEmpty),
             GestureDetector(
                 onTap: () {
-                  _updateStars(2);
+                  _updateStars(2, stars);
                 },
                 child: starEmpty),
             GestureDetector(
                 onTap: () {
-                  _updateStars(3);
+                  _updateStars(3, stars);
                 },
                 child: starEmpty),
             GestureDetector(
                 onTap: () {
-                  _updateStars(4);
+                  _updateStars(4, stars);
                 },
                 child: starEmpty),
             GestureDetector(
                 onTap: () {
-                  _updateStars(5);
+                  _updateStars(5, stars);
                 },
                 child: starEmpty)
           ],
@@ -82,27 +86,27 @@ class Stars {
           children: [
             GestureDetector(
                 onTap: () {
-                  _updateStars(1);
+                  _updateStars(1, stars);
                 },
                 child: starFull),
             GestureDetector(
                 onTap: () {
-                  _updateStars(2);
+                  _updateStars(2, stars);
                 },
                 child: starEmpty),
             GestureDetector(
                 onTap: () {
-                  _updateStars(3);
+                  _updateStars(3, stars);
                 },
                 child: starEmpty),
             GestureDetector(
                 onTap: () {
-                  _updateStars(4);
+                  _updateStars(4, stars);
                 },
                 child: starEmpty),
             GestureDetector(
                 onTap: () {
-                  _updateStars(5);
+                  _updateStars(5, stars);
                 },
                 child: starEmpty)
           ],
@@ -113,27 +117,27 @@ class Stars {
           children: [
             GestureDetector(
                 onTap: () {
-                  _updateStars(1);
+                  _updateStars(1, stars);
                 },
                 child: starFull),
             GestureDetector(
                 onTap: () {
-                  _updateStars(2);
+                  _updateStars(2, stars);
                 },
                 child: starFull),
             GestureDetector(
                 onTap: () {
-                  _updateStars(3);
+                  _updateStars(3, stars);
                 },
                 child: starEmpty),
             GestureDetector(
                 onTap: () {
-                  _updateStars(4);
+                  _updateStars(4, stars);
                 },
                 child: starEmpty),
             GestureDetector(
                 onTap: () {
-                  _updateStars(5);
+                  _updateStars(5, stars);
                 },
                 child: starEmpty)
           ],
@@ -144,27 +148,27 @@ class Stars {
           children: [
             GestureDetector(
                 onTap: () {
-                  _updateStars(1);
+                  _updateStars(1, stars);
                 },
                 child: starFull),
             GestureDetector(
                 onTap: () {
-                  _updateStars(2);
+                  _updateStars(2, stars);
                 },
                 child: starFull),
             GestureDetector(
                 onTap: () {
-                  _updateStars(3);
+                  _updateStars(3, stars);
                 },
                 child: starFull),
             GestureDetector(
                 onTap: () {
-                  _updateStars(4);
+                  _updateStars(4, stars);
                 },
                 child: starEmpty),
             GestureDetector(
                 onTap: () {
-                  _updateStars(5);
+                  _updateStars(5, stars);
                 },
                 child: starEmpty)
           ],
@@ -175,27 +179,27 @@ class Stars {
           children: [
             GestureDetector(
                 onTap: () {
-                  _updateStars(1);
+                  _updateStars(1, stars);
                 },
                 child: starFull),
             GestureDetector(
                 onTap: () {
-                  _updateStars(2);
+                  _updateStars(2, stars);
                 },
                 child: starFull),
             GestureDetector(
                 onTap: () {
-                  _updateStars(3);
+                  _updateStars(3, stars);
                 },
                 child: starFull),
             GestureDetector(
                 onTap: () {
-                  _updateStars(4);
+                  _updateStars(4, stars);
                 },
                 child: starFull),
             GestureDetector(
                 onTap: () {
-                  _updateStars(5);
+                  _updateStars(5, stars);
                 },
                 child: starEmpty)
           ],
@@ -206,27 +210,27 @@ class Stars {
           children: [
             GestureDetector(
                 onTap: () {
-                  _updateStars(1);
+                  _updateStars(1, stars);
                 },
                 child: starFull),
             GestureDetector(
                 onTap: () {
-                  _updateStars(2);
+                  _updateStars(2, stars);
                 },
                 child: starFull),
             GestureDetector(
                 onTap: () {
-                  _updateStars(3);
+                  _updateStars(3, stars);
                 },
                 child: starFull),
             GestureDetector(
                 onTap: () {
-                  _updateStars(4);
+                  _updateStars(4, stars);
                 },
                 child: starFull),
             GestureDetector(
                 onTap: () {
-                  _updateStars(5);
+                  _updateStars(5, stars);
                 },
                 child: starFull)
           ],
@@ -237,27 +241,27 @@ class Stars {
           children: [
             GestureDetector(
                 onTap: () {
-                  _updateStars(1);
+                  _updateStars(1, stars);
                 },
                 child: starGray),
             GestureDetector(
                 onTap: () {
-                  _updateStars(2);
+                  _updateStars(2, stars);
                 },
                 child: starGray),
             GestureDetector(
                 onTap: () {
-                  _updateStars(3);
+                  _updateStars(3, stars);
                 },
                 child: starGray),
             GestureDetector(
                 onTap: () {
-                  _updateStars(4);
+                  _updateStars(4, stars);
                 },
                 child: starGray),
             GestureDetector(
                 onTap: () {
-                  _updateStars(5);
+                  _updateStars(5, stars);
                 },
                 child: starGray),
           ],
@@ -274,6 +278,8 @@ class RecetasEsp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _screen = MediaQuery.of(context).size;
+
+    int _stars = data["stars"];
     return Material(
       child: Screenshot(
         controller: screenshotController,
@@ -396,7 +402,7 @@ class RecetasEsp extends StatelessWidget {
                     ),
                     Column(
                       children: [
-                        starsInstance._countStars(data["stars"]),
+                        starsInstance._countStars(_stars),
                         Container(
                           height: 200,
                           width: 200,

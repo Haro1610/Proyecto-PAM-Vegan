@@ -49,6 +49,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       print("Error al autenticar: $e");
       emit(AuthErrorState());
     }
+    // if (FirebaseAuth.instance.currentUser!.isAnonymous) {
+    //   await _authRepo.singOutFirebaseUsers();
+    // } else {
+    //   await _authRepo.singOutFirebaseUsers();
+    //   await _authRepo.singOutGoogleUsers();
+    // }
   }
 
   FutureOr<void> _authAnonymous(event, emit) {}

@@ -37,10 +37,11 @@ class PerfilState extends State<Perfil> {
         ),
         child: Column(
           children: [
-            SizedBox(height: 20),
             CircleAvatar(
+
               backgroundImage: NetworkImage(
                   BlocProvider.of<AuthBloc>(context).usuario.photoURL!),
+
               radius: 50.0,
             ),
             Text(BlocProvider.of<AuthBloc>(context).usuario.displayName!,
