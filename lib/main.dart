@@ -14,7 +14,7 @@ import 'package:planternativo/perfil/perfil.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
+  //buena branch
   runApp(MultiBlocProvider(
     providers: [
       BlocProvider(

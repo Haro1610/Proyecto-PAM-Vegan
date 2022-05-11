@@ -311,7 +311,7 @@ class Recetas extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 children: [
                   Platillo(
-                      3,
+                      4,
                       "name",
                       "author",
                       "ingredients",
