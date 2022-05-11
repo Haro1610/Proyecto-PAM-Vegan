@@ -273,125 +273,48 @@ class RecetasEsp extends StatelessWidget {
   ScreenshotController screenshotController = ScreenshotController();
   @override
   Widget build(BuildContext context) {
-    final _screen = MediaQuery.of(context).size;
-    return Material(
-      child: Screenshot(
-        controller: screenshotController,
-        child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color.fromARGB(255, 128, 185, 63),
-                Color.fromARGB(255, 5, 139, 34)
-              ],
-            ),
+    return Scaffold(
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Colors.lightGreen,
+              Colors.blueAccent,
+            ],
           ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                color: Color.fromARGB(255, 1, 61, 3),
-                width: _screen.width,
-                height: 100,
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 40,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => Perfil()));
-                            },
-                            icon: Icon(Icons.account_circle_rounded),
-                            color: Colors.green,
-                          ),
-                          Text(
-                            "Planternativo",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.pacifico(
-                                textStyle: TextStyle(
-                              fontSize: 30.0,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            )),
-                          ),
-                          IconButton(
-                            onPressed: () {
-                              BlocProvider.of<AuthBloc>(context)
-                                  .add(SingOutEvent());
-                            },
-                            icon: Icon(Icons.logout),
-                            color: Colors.green,
-                          )
-                        ],
-                      ),
-                    ],
+        ),
+        height: MediaQuery.of(context).size.height,
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(16.0),
+              color: Colors.white,
+            ),
+            child: Column(
+              children: [
+                Card(
+                  child: ListTile(
+                    leading: Image.network(
+                        "https://mui.kitchen/__export/1627825762891/sites/muikitchen/img/2021/08/01/pollo-al-horno-con-limon.jpg_1778406236.jpg"),
+                    title: const Text('Pollo asado'),
+                    subtitle: Text(
+                      'por Anasofia',
+                      style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                      onPressed: () async {
-                        double pixelRatio =
-                            MediaQuery.of(context).devicePixelRatio;
-                        _storeAndShare((await screenshotController.capture(
-                            pixelRatio: pixelRatio))!);
-                      },
-                      icon: Icon(
-                        Icons.share,
-                        color: Color.fromARGB(255, 2, 54, 4),
-                      )),
-                  Text(
-                    data["name"],
-                    style: GoogleFonts.pacifico(
-                        textStyle: TextStyle(
-                      fontSize: 30.0,
-                      color: Color.fromARGB(255, 2, 54, 4),
-                      fontWeight: FontWeight.bold,
-                    )),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Column(
-                children: [
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    Container(
-                      width: _screen.width * 0.45,
-                      height: _screen.height * 0.3,
-                      child: Card(
-                        shape: null,
-                        elevation: 5,
-                        child: Padding(
-                          padding: EdgeInsets.all(16),
-                          child: Expanded(
-                            flex: 1,
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.vertical,
-                              child: Text(data["ingredients"],
-                                  style: GoogleFonts.overpass(
-                                      textStyle: TextStyle(
-                                    fontSize: 12,
-                                  ))),
-                            ),
-                          ),
-                        ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: const Text(
+                        "Ingredientes",
+                        textAlign: TextAlign.center,
                       ),
                     ),
                     Column(
@@ -447,15 +370,31 @@ class RecetasEsp extends StatelessWidget {
                         ),
                       ),
                     ),
+                  ],
+                ),
+                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text("Preparacion"),
+                      Text("-Mezcle las especias y limon en un recipiente"),
+                      Text("-Frote al pollo con la mezcla"),
+                      Text("-Deje reposar por dos horas"),
+                      Text(
+                          "-Introducir al horno a 80 grados centigrados por una hora"),
+                    ],
                   ),
-                ],
-              )
-            ],
+                ),
+              ],
+            ),
           ),
         ),
       ),
     );
   }
+
 
   Future _storeAndShare(Uint8List bytes) async {
     ///Store Plugin
