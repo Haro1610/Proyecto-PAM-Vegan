@@ -37,8 +37,8 @@ class PerfilState extends State<Perfil> {
         ),
         child: Column(
           children: [
+            SizedBox(height: 20),
             CircleAvatar(
-              //si hay una imagen en la cuenta de google se debe importar aquí
               backgroundImage: _imageCon
                   ? NetworkImage(
                       "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvignette.wikia.nocookie.net%2Fjacksepticeye%2Fimages%2Ff%2Ff6%2FCLICK_HERE_TO_CHANGE_YOUR_LIFE_image.jpg%2Frevision%2Flatest%3Fcb%3D20180311211255&f=1&nofb=1")
