@@ -11,7 +11,7 @@ import 'package:planternativo/recetas/bloc/crear_bloc.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-
+  //buena branch
   runApp(MultiBlocProvider(
     providers: [
       BlocProvider(
