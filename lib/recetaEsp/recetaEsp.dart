@@ -14,6 +14,8 @@ import '../auth/bloc/auth_bloc.dart';
 class Stars {
   bool rated = false;
 
+  //Esta función regresa la nueva calificación de las estrellas de la receta.
+  //Falta un bloc que actualice la calificación en firebase de la receta.
   double _updateStars(int stars, int global) {
     if (!rated) {
       double calificacion = 0.0;

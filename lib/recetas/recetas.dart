@@ -252,9 +252,11 @@ class Recetas extends StatelessWidget {
                             };
                             BlocProvider.of<CrearBloc>(context).add(
                                 OnCrearSaveDataEvent(dataToSave: recetaMapa));
-                            Navigator.pop(context, 'Cancelar');
+
+                            //Este bloc no funciona bien, no se actualiza la lista de recetas al crear una nueva.
                             BlocProvider.of<PendingBloc>(context)
                                 .add(GetRecetasEvent());
+                            Navigator.pop(context, 'Cancelar');
                           },
                           child: Text(
                             "Aceptar",
