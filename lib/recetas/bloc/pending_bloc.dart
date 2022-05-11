@@ -15,27 +15,10 @@ class PendingBloc extends Bloc<PendingEvent, PendingState> {
   FutureOr<void> _getMyContent(event, emit) async {
     emit(PendingFotosLoadingState());
     try {
-      // query para traer el documento con el id del usuario autenticado
-      var queryUser = await FirebaseFirestore.instance
-          .collection("users")
-          .doc(FirebaseAuth.instance.currentUser!.uid);
-
-      // query para sacar la data del documento
-      var docsRef = await queryUser.get();
-
-      var listIds = docsRef.data()?["recetas"];
-
-      print("---------------------------");
-      print(listIds);
-      print("---------------------------");
-
       // query para sacar documentos de fshare
-      var queryFotos =
+      var queryRecetas =
           await FirebaseFirestore.instance.collection("recetas").get();
-
-      // query de Dart filtrando la info utilizando como referencia la lista de ids de docs del usuario actual
-      var myContentList = queryFotos.docs
-          .where((doc) => listIds.contains(doc.id))
+      var myContentList = queryRecetas.docs
           .map((doc) => doc.data().cast<String, dynamic>())
           .toList();
 

@@ -9,6 +9,7 @@ import 'package:planternativo/recetas/bloc/crear_bloc.dart';
 import 'package:planternativo/restaurantes/restaurantes.dart';
 import 'package:planternativo/perfil/perfil.dart';
 
+import 'perfil/bloc/profile_recetas_bloc.dart';
 import 'recetas/bloc/pending_bloc.dart';
 
 //Bloc
@@ -24,6 +25,9 @@ void main() async {
       ),
       BlocProvider(create: ((context) => CrearBloc())),
       BlocProvider(create: (context) => PendingBloc()..add(GetRecetasEvent())),
+      BlocProvider(
+          create: (context) =>
+              ProfileRecetasBloc()..add(GetProfileRecetasEvent())),
     ],
     child: MyApp(),
   ));
@@ -36,16 +40,21 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.green),
       title: 'Material App',
-      home: Restaurantes(),
-      /*MultiBlocProvider(
-        providers: [
-          
-          BlocProvider(create: (context) => FraseBloc()..add(FraseGet())),
-          BlocProvider(create: (context) => ImageBloc()..add(ImageGet())),
-          BlocProvider(create: (context) => TimeBloc()..add(TimeGet())),
-        ],
-        child: Principal(),
-      ),*/
+      home: BlocConsumer<AuthBloc, AuthState>(
+        listener: (context, state) {
+          // TODO: implement listener
+        },
+        builder: (context, state) {
+          if (state is AuthSuccesState) {
+            return Principal();
+          } else if (state is AuthErrorState) {
+            return Login();
+          } else if (state is SingOutSucces) {
+            return Login();
+          }
+          return Center(child: CircularProgressIndicator());
+        },
+      ),
     );
   }
 }
