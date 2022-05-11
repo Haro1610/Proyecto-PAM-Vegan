@@ -20,9 +20,6 @@ class Perfil extends StatefulWidget {
 class PerfilState extends State<Perfil> {
   @override
   Widget build(BuildContext context) {
-    File? _imagenPerfil;
-    bool _imageCon = true;
-    String _recetasCant = "1200";
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
@@ -38,10 +35,8 @@ class PerfilState extends State<Perfil> {
         child: Column(
           children: [
             CircleAvatar(
-
               backgroundImage: NetworkImage(
                   BlocProvider.of<AuthBloc>(context).usuario.photoURL!),
-
               radius: 50.0,
             ),
             Text(BlocProvider.of<AuthBloc>(context).usuario.displayName!,
@@ -78,7 +73,7 @@ class PerfilState extends State<Perfil> {
                             height: 5.0,
                           ),
                           Text(
-                            _recetasCant,
+                            "DEBEMOS MOSTRAR LA CANT DE RECETAS",
                             style: GoogleFonts.overpass(
                               textStyle: TextStyle(
                                 fontSize: 19.0,
