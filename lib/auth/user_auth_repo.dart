@@ -9,6 +9,7 @@ class UserAuthRepository {
   final GoogleSignIn _googleSingIn = GoogleSignIn(scopes: ["email"]);
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  String photoUrl = "";
 
   bool isAlreadyAuthenticated() {
     return _auth.currentUser != null;

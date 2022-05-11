@@ -1,12 +1,14 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_shimmer/flutter_shimmer.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:planternativo/perfil/bloc/profile_recetas_bloc.dart';
+import 'package:planternativo/recetas/recetas.dart';
 
-import '../recetaEsp/recetaEsp.dart';
+import '../auth/bloc/auth_bloc.dart';
+import 'bloc/profile_recetas_bloc.dart';
 
 class Perfil extends StatefulWidget {
   Perfil({Key? key}) : super(key: key);
@@ -15,195 +17,120 @@ class Perfil extends StatefulWidget {
   State<Perfil> createState() => PerfilState();
 }
 
-class Platillo extends StatelessWidget {
-  int stars = 6;
-  String name = "Pozole";
-  String author = "Iñaki";
-  String ingredients = "Chile";
-  String image = "";
-  String description = "";
-
-  Platillo(int stars, String name, String author, String ingredients,
-      String image, String description) {
-    this.stars = stars;
-    this.name = name;
-    this.author = author;
-    this.ingredients = ingredients;
-    this.image = image;
-    this.description = description;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => RecetasEsp({
-                  "stars": stars,
-                  "name": name,
-                  "author": author,
-                  "ingredients": ingredients,
-                  "image": image,
-                  "description": description
-                })));
-        /*
-        BlocProvider.of<TimeBloc>(context).pais = PlatilloName;
-        BlocProvider.of<TimeBloc>(context).add(TimeGet());
-        BlocProvider.of<ImageBloc>(context).add(ImageGet());
-        BlocProvider.of<FraseBloc>(context).add(FraseGet());*/
-      },
-      child: Card(
-        margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 3.0),
-        clipBehavior: Clip.antiAlias,
-        color: Colors.white,
-        elevation: 6.0,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 22.0),
-          child: Row(
-            children: [
-              Expanded(
-                child: Column(
-                  children: [
-                    Text(name,
-                        style: GoogleFonts.pacifico(
-                          textStyle: TextStyle(
-                            color: Color.fromARGB(255, 93, 144, 100),
-                            fontSize: 22.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        )),
-                    SizedBox(
-                      height: 3.0,
-                    ),
-                    Text("Autor: " + author,
-                        style: GoogleFonts.overpass(
-                          textStyle: TextStyle(
-                            color: Color.fromARGB(255, 93, 144, 100),
-                            fontSize: 15.0,
-                          ),
-                        )),
-                    SizedBox(
-                      height: 3.0,
-                    ),
-                    _CountStars(stars),
-                  ],
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class PerfilState extends State<Perfil> {
   @override
   Widget build(BuildContext context) {
     File? _imagenPerfil;
     bool _imageCon = true;
     String _recetasCant = "1200";
-    String _autor = "Iñaki Orozco";
-    return Scaffold(
-      body: Column(
-        children: [
-          Container(
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
-                      colors: [
-                    Color.fromARGB(255, 35, 129, 13),
-                    Color.fromARGB(255, 93, 144, 100)
-                  ])),
-              height: MediaQuery.of(context).size.height,
-              child: Container(
-                margin: EdgeInsets.only(top: 20.0),
-                width: double.infinity,
-                child: Center(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      CircleAvatar(
-                        //si hay una imagen en la cuenta de google se debe importar aquí
-                        backgroundImage: _imageCon
-                            ? NetworkImage(
-                                "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvignette.wikia.nocookie.net%2Fjacksepticeye%2Fimages%2Ff%2Ff6%2FCLICK_HERE_TO_CHANGE_YOUR_LIFE_image.jpg%2Frevision%2Flatest%3Fcb%3D20180311211255&f=1&nofb=1")
-                            : _imagenPerfil as ImageProvider,
-                        radius: 50.0,
-                        //child: BlocProvider.of(context).au,
-                      ),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Text(_autor,
-                          style: GoogleFonts.overpass(
-                            textStyle: TextStyle(
-                              fontSize: 20.0,
-                              color: Colors.white,
-                            ),
-                          )),
-                      SizedBox(
-                        height: 10.0,
-                      ),
-                      Card(
-                        margin: EdgeInsets.symmetric(
-                            horizontal: 20.0, vertical: 5.0),
-                        clipBehavior: Clip.antiAlias,
-                        color: Colors.green,
-                        elevation: 8.0,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8.0, vertical: 22.0),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: Column(
-                                  children: [
-                                    Text("Recetas",
-                                        style: GoogleFonts.overpass(
-                                          textStyle: TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20.0,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        )),
-                                    SizedBox(
-                                      height: 5.0,
-                                    ),
-                                    Text(_recetasCant,
-                                        style: GoogleFonts.overpass(
-                                          textStyle: TextStyle(
-                                            fontSize: 19.0,
-                                            color: Colors.white,
-                                          ),
-                                        )),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Container(
-                          height: MediaQuery.of(context).size.height * .65,
-                          child: ListView(
-                              scrollDirection: Axis.vertical,
-                              children: [
-                                Platillo(
-                                    3,
-                                    "name",
-                                    "author",
-                                    "ingredients",
-                                    "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvignette.wikia.nocookie.net%2Fjacksepticeye%2Fimages%2Ff%2Ff6%2FCLICK_HERE_TO_CHANGE_YOUR_LIFE_image.jpg%2Frevision%2Flatest%3Fcb%3D20180311211255&f=1&nofb=1",
-                                    "description"),
-                              ])),
-                    ],
+    return Expanded(
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color.fromARGB(255, 35, 129, 13),
+              Color.fromARGB(255, 93, 144, 100)
+            ],
+          ),
+        ),
+        child: Column(
+          children: [
+            CircleAvatar(
+
+              backgroundImage: NetworkImage(
+                  BlocProvider.of<AuthBloc>(context).usuario.photoURL!),
+
+              radius: 50.0,
+            ),
+            Text(BlocProvider.of<AuthBloc>(context).usuario.displayName!,
+                style: GoogleFonts.overpass(
+                  textStyle: TextStyle(
+                    fontSize: 20.0,
+                    color: Colors.white,
                   ),
+                )),
+            Card(
+              margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
+              clipBehavior: Clip.antiAlias,
+              color: Colors.green,
+              elevation: 8.0,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8.0, vertical: 22.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        children: [
+                          Text(
+                            "Recetas",
+                            style: GoogleFonts.overpass(
+                              textStyle: TextStyle(
+                                color: Colors.white,
+                                fontSize: 20.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5.0,
+                          ),
+                          Text(
+                            _recetasCant,
+                            style: GoogleFonts.overpass(
+                              textStyle: TextStyle(
+                                fontSize: 19.0,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-              )),
-        ],
+              ),
+            ),
+            Expanded(
+              child: BlocConsumer<ProfileRecetasBloc, ProfileRecetasState>(
+                listener: (context, state) {},
+                builder: (context, state) {
+                  if (state is ProfileRecetasLoadingState) {
+                    return ListView.builder(
+                      itemCount: 25,
+                      itemBuilder: (BuildContext context, int index) {
+                        return YoutubeShimmer();
+                      },
+                    );
+                  } else if (state is ProfileRecetasEmptyState) {
+                    return Center(
+                      child: Text("No hay datos por mostrar"),
+                    );
+                  } else if (state is ProfileRecetasSuccessState) {
+                    return ListView.builder(
+                      itemCount: state.myData.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Platillo(
+                            state.myData[index]['stars'],
+                            state.myData[index]['nombre'],
+                            state.myData[index]['autor'],
+                            state.myData[index]['ingredientes'],
+                            state.myData[index]['imagen'],
+                            state.myData[index]['procedimiento']);
+                      },
+                    );
+                  } else {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
