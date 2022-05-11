@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -20,7 +21,7 @@ class Platillo extends StatelessWidget {
   String author = "Iñaki";
   String ingredients = "Chile";
   String image = "";
-  String description = "Echale mucho";
+  String description = "";
 
   Platillo(int stars, String name, String author, String ingredients,
       String image, String description) {
@@ -131,6 +132,7 @@ class PerfilState extends State<Perfil> {
                                 "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvignette.wikia.nocookie.net%2Fjacksepticeye%2Fimages%2Ff%2Ff6%2FCLICK_HERE_TO_CHANGE_YOUR_LIFE_image.jpg%2Frevision%2Flatest%3Fcb%3D20180311211255&f=1&nofb=1")
                             : _imagenPerfil as ImageProvider,
                         radius: 50.0,
+                        //child: BlocProvider.of(context).au,
                       ),
                       SizedBox(
                         height: 10.0,
