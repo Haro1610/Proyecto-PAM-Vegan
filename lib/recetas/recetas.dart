@@ -332,13 +332,16 @@ class Recetas extends StatelessWidget {
                     return ListView.builder(
                       itemCount: state.myData.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return Platillo(
-                            state.myData[index]['stars'],
-                            state.myData[index]['nombre'],
-                            state.myData[index]['autor'],
-                            state.myData[index]['ingredientes'],
-                            state.myData[index]['imagen'],
-                            state.myData[index]['procedimiento']);
+                        var stars = state.myData[index]['stars'];
+                        var nombre = state.myData[index]['nombre'];
+                        var autor = state.myData[index]['autor'];
+                        var ingredientes = state.myData[index]['ingredientes'];
+                        var imagen = state.myData[index]['imagen'];
+                        var procedimiento =
+                            state.myData[index]['procedimiento'];
+
+                        return Platillo(stars, nombre, autor, ingredientes,
+                            imagen, procedimiento);
                       },
                     );
                   } else {

@@ -73,7 +73,7 @@ class PerfilState extends State<Perfil> {
                             height: 5.0,
                           ),
                           Text(
-                            "DEBEMOS MOSTRAR LA CANT DE RECETAS",
+                            "3",
                             style: GoogleFonts.overpass(
                               textStyle: TextStyle(
                                 fontSize: 19.0,
