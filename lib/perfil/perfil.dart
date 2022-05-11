@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:planternativo/perfil/bloc/profile_recetas_bloc.dart';
 import 'package:planternativo/recetas/recetas.dart';
 
+import '../auth/bloc/auth_bloc.dart';
 import 'bloc/profile_recetas_bloc.dart';
 
 class Perfil extends StatefulWidget {
@@ -22,7 +23,6 @@ class PerfilState extends State<Perfil> {
     File? _imagenPerfil;
     bool _imageCon = true;
     String _recetasCant = "1200";
-    String _autor = "Iñaki Orozco";
     return Expanded(
       child: Container(
         decoration: BoxDecoration(
@@ -39,13 +39,11 @@ class PerfilState extends State<Perfil> {
           children: [
             SizedBox(height: 20),
             CircleAvatar(
-              backgroundImage: _imageCon
-                  ? NetworkImage(
-                      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvignette.wikia.nocookie.net%2Fjacksepticeye%2Fimages%2Ff%2Ff6%2FCLICK_HERE_TO_CHANGE_YOUR_LIFE_image.jpg%2Frevision%2Flatest%3Fcb%3D20180311211255&f=1&nofb=1")
-                  : _imagenPerfil as ImageProvider,
+              backgroundImage: NetworkImage(
+                  BlocProvider.of<AuthBloc>(context).usuario.photoURL!),
               radius: 50.0,
             ),
-            Text(_autor,
+            Text(BlocProvider.of<AuthBloc>(context).usuario.displayName!,
                 style: GoogleFonts.overpass(
                   textStyle: TextStyle(
                     fontSize: 20.0,

@@ -9,6 +9,7 @@ part 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   UserAuthRepository _authRepo = UserAuthRepository();
+  User usuario = FirebaseAuth.instance.currentUser!;
 
   AuthBloc() : super(AuthInitial()) {
     on<VerifyAuthEvent>(_authVerification);
@@ -41,6 +42,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     emit(AuthAwaitingState());
     try {
       await _authRepo.singInGoogle();
+      usuario = FirebaseAuth.instance.currentUser!;
 
       emit(AuthSuccesState());
     } catch (e) {
