@@ -4,7 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:planternativo/auth/bloc/auth_bloc.dart';
 import 'package:planternativo/login/login.dart';
 import 'package:planternativo/principal/principal.dart';
+<<<<<<< HEAD
 import 'package:planternativo/recetas/bloc/crear_bloc.dart';
+=======
+import 'package:planternativo/recetaEsp/recetaEsp.dart';
+import 'package:planternativo/restaurantes/restaurantes.dart';
+import 'package:planternativo/perfil/perfil.dart';
+>>>>>>> main
 
 //Bloc
 
@@ -30,6 +36,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.green),
       title: 'Material App',
+<<<<<<< HEAD
       home: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           // TODO: implement listener
@@ -45,6 +52,18 @@ class MyApp extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         },
       ),
+=======
+      home: Restaurantes(),
+      /*MultiBlocProvider(
+        providers: [
+          
+          BlocProvider(create: (context) => FraseBloc()..add(FraseGet())),
+          BlocProvider(create: (context) => ImageBloc()..add(ImageGet())),
+          BlocProvider(create: (context) => TimeBloc()..add(TimeGet())),
+        ],
+        child: Principal(),
+      ),*/
+>>>>>>> main
     );
   }
 }

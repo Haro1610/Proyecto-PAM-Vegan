@@ -324,6 +324,7 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+<<<<<<< HEAD
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -429,6 +430,10 @@ packages:
     version: "0.10.0+5"
   http:
     dependency: transitive
+=======
+  http:
+    dependency: "direct main"
+>>>>>>> main
     description:
       name: http
       url: "https://pub.dartlang.org"
@@ -441,6 +446,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
+<<<<<<< HEAD
   image_picker:
     dependency: "direct main"
     description:
@@ -490,6 +496,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.3"
+=======
+>>>>>>> main
   lints:
     dependency: transitive
     description:
