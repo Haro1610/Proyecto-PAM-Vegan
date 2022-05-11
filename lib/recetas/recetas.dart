@@ -311,12 +311,12 @@ class Recetas extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 children: [
                   Platillo(
-                      4,
-                      "name",
-                      "author",
-                      "ingredients",
-                      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvignette.wikia.nocookie.net%2Fjacksepticeye%2Fimages%2Ff%2Ff6%2FCLICK_HERE_TO_CHANGE_YOUR_LIFE_image.jpg%2Frevision%2Flatest%3Fcb%3D20180311211255&f=1&nofb=1",
-                      "description"),
+                      1,
+                      "Tacos de pene",
+                      "Iñaki",
+                      "Carne de pene",
+                      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fthestayathomechef.com%2Fwp-content%2Fuploads%2F2019%2F07%2FGrilled-Chicken-Tacos-1.jpg&f=1&nofb=1",
+                      "Tortilla y carne, nada más"),
                 ],
               ),
             ),
