@@ -278,6 +278,7 @@ class RecetasEsp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _screen = MediaQuery.of(context).size;
+
     int _stars = data["stars"];
     return Material(
       child: Screenshot(
