@@ -15,7 +15,6 @@ dependencies:
   permission_handler: ^9.2.0
 
   cupertino_icons: ^1.0.2
-<<<<<<< HEAD
   flutter_bloc: ^8.0.1
   firebase_core:
   equatable:
@@ -37,9 +36,7 @@ dependencies:
   flutter_rating_bar: ^4.0.0
   screenshot: ^1.2.3
   share_plus: ^4.0.4
-=======
   http: ^0.13.4
->>>>>>> main
 
 dev_dependencies:
   flutter_test:
