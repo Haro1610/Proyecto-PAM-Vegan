@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_shimmer/flutter_shimmer.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:planternativo/auth/bloc/auth_bloc.dart';
@@ -10,6 +11,8 @@ import 'package:planternativo/perfil/perfil.dart';
 import 'package:planternativo/recetaEsp/recetaEsp.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:planternativo/recetas/bloc/crear_bloc.dart';
+
+import 'bloc/pending_bloc.dart';
 
 class Platillo extends StatelessWidget {
   int stars = 6;
@@ -33,20 +36,20 @@ class Platillo extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => RecetasEsp({
-                  "stars": stars,
-                  "name": name,
-                  "author": author,
-                  "ingredients": ingredients,
-                  "image": image,
-                  "description": description
-                })));
-        /*
-        BlocProvider.of<TimeBloc>(context).pais = PlatilloName;
-        BlocProvider.of<TimeBloc>(context).add(TimeGet());
-        BlocProvider.of<ImageBloc>(context).add(ImageGet());
-        BlocProvider.of<FraseBloc>(context).add(FraseGet());*/
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => RecetasEsp(
+              {
+                "stars": stars,
+                "name": name,
+                "author": author,
+                "ingredients": ingredients,
+                "image": image,
+                "description": description
+              },
+            ),
+          ),
+        );
       },
       child: Card(
         margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 3.0),
@@ -250,6 +253,8 @@ class Recetas extends StatelessWidget {
                             BlocProvider.of<CrearBloc>(context).add(
                                 OnCrearSaveDataEvent(dataToSave: recetaMapa));
                             Navigator.pop(context, 'Cancelar');
+                            BlocProvider.of<PendingBloc>(context)
+                                .add(GetRecetasEvent());
                           },
                           child: Text(
                             "Aceptar",
@@ -307,17 +312,39 @@ class Recetas extends StatelessWidget {
             child: Container(
               decoration: null,
               height: 0,
-              child: ListView(
-                scrollDirection: Axis.vertical,
-                children: [
-                  Platillo(
-                      4,
-                      "name",
-                      "author",
-                      "ingredients",
-                      "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fvignette.wikia.nocookie.net%2Fjacksepticeye%2Fimages%2Ff%2Ff6%2FCLICK_HERE_TO_CHANGE_YOUR_LIFE_image.jpg%2Frevision%2Flatest%3Fcb%3D20180311211255&f=1&nofb=1",
-                      "description"),
-                ],
+              child: BlocConsumer<PendingBloc, PendingState>(
+                listener: (context, state) {},
+                builder: (context, state) {
+                  if (state is PendingFotosLoadingState) {
+                    return ListView.builder(
+                      itemCount: 25,
+                      itemBuilder: (BuildContext context, int index) {
+                        return YoutubeShimmer();
+                      },
+                    );
+                  } else if (state is PendingFotosEmptyState) {
+                    return Center(
+                      child: Text("No hay datos por mostrar"),
+                    );
+                  } else if (state is PendingFotosSuccessState) {
+                    return ListView.builder(
+                      itemCount: state.myData.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Platillo(
+                            state.myData[index]['stars'],
+                            state.myData[index]['nombre'],
+                            state.myData[index]['autor'],
+                            state.myData[index]['ingredientes'],
+                            state.myData[index]['imagen'],
+                            state.myData[index]['procedimiento']);
+                      },
+                    );
+                  } else {
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                },
               ),
             ),
           ),

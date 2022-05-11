@@ -6,6 +6,8 @@ import 'package:planternativo/login/login.dart';
 import 'package:planternativo/principal/principal.dart';
 import 'package:planternativo/recetas/bloc/crear_bloc.dart';
 
+import 'recetas/bloc/pending_bloc.dart';
+
 //Bloc
 
 void main() async {
@@ -17,7 +19,8 @@ void main() async {
       BlocProvider(
         create: ((context) => AuthBloc()..add(VerifyAuthEvent())),
       ),
-      BlocProvider(create: ((context) => CrearBloc()))
+      BlocProvider(create: ((context) => CrearBloc())),
+      BlocProvider(create: (context) => PendingBloc()..add(GetRecetasEvent())),
     ],
     child: MyApp(),
   ));
