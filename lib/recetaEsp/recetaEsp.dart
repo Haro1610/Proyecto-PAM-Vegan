@@ -4,15 +4,270 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:planternativo/perfil/perfil.dart';
-
 import 'package:path_provider/path_provider.dart';
+import 'package:planternativo/perfil/perfil.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share_plus/share_plus.dart';
 
 import '../auth/bloc/auth_bloc.dart';
 
+class Stars {
+  bool rated = false;
+
+  int _updateStars(int stars) {
+    print(rated);
+    if (!rated) {
+      rated = true;
+      //aquí debemos actualizar la información sumando a las estrellas de la receta y luego promediando entre todas las calificaciones
+      return stars;
+    }
+
+    return -1;
+  }
+
+  Row _countStars(int stars) {
+    var starFull = Icon(
+      Icons.star,
+      color: Colors.white,
+      size: 24.0,
+      semanticLabel: 'Text to announce in accessibility modes',
+    );
+    var starEmpty = Icon(
+      Icons.star_border_outlined,
+      color: Colors.white,
+      size: 24.0,
+      semanticLabel: 'Text to announce in accessibility modes',
+    );
+    var starGray = Icon(
+      Icons.star,
+      color: Color.fromARGB(255, 92, 92, 92),
+      size: 24.0,
+      semanticLabel: 'Text to announce in accessibility modes',
+    );
+    switch (stars) {
+      case 0:
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GestureDetector(
+                onTap: () {
+                  _updateStars(1);
+                },
+                child: starEmpty),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(2);
+                },
+                child: starEmpty),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(3);
+                },
+                child: starEmpty),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(4);
+                },
+                child: starEmpty),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(5);
+                },
+                child: starEmpty)
+          ],
+        );
+      case 1:
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GestureDetector(
+                onTap: () {
+                  _updateStars(1);
+                },
+                child: starFull),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(2);
+                },
+                child: starEmpty),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(3);
+                },
+                child: starEmpty),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(4);
+                },
+                child: starEmpty),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(5);
+                },
+                child: starEmpty)
+          ],
+        );
+      case 2:
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GestureDetector(
+                onTap: () {
+                  _updateStars(1);
+                },
+                child: starFull),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(2);
+                },
+                child: starFull),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(3);
+                },
+                child: starEmpty),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(4);
+                },
+                child: starEmpty),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(5);
+                },
+                child: starEmpty)
+          ],
+        );
+      case 3:
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GestureDetector(
+                onTap: () {
+                  _updateStars(1);
+                },
+                child: starFull),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(2);
+                },
+                child: starFull),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(3);
+                },
+                child: starFull),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(4);
+                },
+                child: starEmpty),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(5);
+                },
+                child: starEmpty)
+          ],
+        );
+      case 4:
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GestureDetector(
+                onTap: () {
+                  _updateStars(1);
+                },
+                child: starFull),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(2);
+                },
+                child: starFull),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(3);
+                },
+                child: starFull),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(4);
+                },
+                child: starFull),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(5);
+                },
+                child: starEmpty)
+          ],
+        );
+      case 5:
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GestureDetector(
+                onTap: () {
+                  _updateStars(1);
+                },
+                child: starFull),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(2);
+                },
+                child: starFull),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(3);
+                },
+                child: starFull),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(4);
+                },
+                child: starFull),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(5);
+                },
+                child: starFull)
+          ],
+        );
+      default:
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GestureDetector(
+                onTap: () {
+                  _updateStars(1);
+                },
+                child: starGray),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(2);
+                },
+                child: starGray),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(3);
+                },
+                child: starGray),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(4);
+                },
+                child: starGray),
+            GestureDetector(
+                onTap: () {
+                  _updateStars(5);
+                },
+                child: starGray),
+          ],
+        );
+    }
+  }
+}
+
 class RecetasEsp extends StatelessWidget {
+  var starsInstance = Stars();
   RecetasEsp(this.data);
   final Map<String, dynamic> data;
   ScreenshotController screenshotController = ScreenshotController();
@@ -141,7 +396,7 @@ class RecetasEsp extends StatelessWidget {
                     ),
                     Column(
                       children: [
-                        _CountStars(data["stars"]),
+                        starsInstance._countStars(data["stars"]),
                         Container(
                           height: 200,
                           width: 200,
@@ -212,245 +467,5 @@ class RecetasEsp extends StatelessWidget {
 
     /// Share Plugin
     await Share.shareFiles([imagePath.path]);
-  }
-}
-
-Row _CountStars(int stars) {
-  var starFull = Icon(
-    Icons.star,
-    color: Colors.white,
-    size: 24.0,
-    semanticLabel: 'Text to announce in accessibility modes',
-  );
-  var starEmpty = Icon(
-    Icons.star_border_outlined,
-    color: Colors.white,
-    size: 24.0,
-    semanticLabel: 'Text to announce in accessibility modes',
-  );
-  var starGray = Icon(
-    Icons.star,
-    color: Color.fromARGB(255, 92, 92, 92),
-    size: 24.0,
-    semanticLabel: 'Text to announce in accessibility modes',
-  );
-  switch (stars) {
-    case 0:
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GestureDetector(
-              onTap: () {
-                print("1");
-              },
-              child: starEmpty),
-          GestureDetector(
-              onTap: () {
-                print("2");
-              },
-              child: starEmpty),
-          GestureDetector(
-              onTap: () {
-                print("3");
-              },
-              child: starEmpty),
-          GestureDetector(
-              onTap: () {
-                print("4");
-              },
-              child: starEmpty),
-          GestureDetector(
-              onTap: () {
-                print("5");
-              },
-              child: starEmpty)
-        ],
-      );
-    case 1:
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GestureDetector(
-              onTap: () {
-                print("1");
-              },
-              child: starFull),
-          GestureDetector(
-              onTap: () {
-                print("2");
-              },
-              child: starEmpty),
-          GestureDetector(
-              onTap: () {
-                print("3");
-              },
-              child: starEmpty),
-          GestureDetector(
-              onTap: () {
-                print("4");
-              },
-              child: starEmpty),
-          GestureDetector(
-              onTap: () {
-                print("5");
-              },
-              child: starEmpty)
-        ],
-      );
-    case 2:
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GestureDetector(
-              onTap: () {
-                print("1");
-              },
-              child: starFull),
-          GestureDetector(
-              onTap: () {
-                print("2");
-              },
-              child: starFull),
-          GestureDetector(
-              onTap: () {
-                print("3");
-              },
-              child: starEmpty),
-          GestureDetector(
-              onTap: () {
-                print("4");
-              },
-              child: starEmpty),
-          GestureDetector(
-              onTap: () {
-                print("5");
-              },
-              child: starEmpty)
-        ],
-      );
-    case 3:
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GestureDetector(
-              onTap: () {
-                print("1");
-              },
-              child: starFull),
-          GestureDetector(
-              onTap: () {
-                print("2");
-              },
-              child: starFull),
-          GestureDetector(
-              onTap: () {
-                print("3");
-              },
-              child: starFull),
-          GestureDetector(
-              onTap: () {
-                print("4");
-              },
-              child: starEmpty),
-          GestureDetector(
-              onTap: () {
-                print("5");
-              },
-              child: starEmpty)
-        ],
-      );
-    case 4:
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GestureDetector(
-              onTap: () {
-                print("1");
-              },
-              child: starFull),
-          GestureDetector(
-              onTap: () {
-                print("2");
-              },
-              child: starFull),
-          GestureDetector(
-              onTap: () {
-                print("3");
-              },
-              child: starFull),
-          GestureDetector(
-              onTap: () {
-                print("4");
-              },
-              child: starFull),
-          GestureDetector(
-              onTap: () {
-                print("5");
-              },
-              child: starEmpty)
-        ],
-      );
-    case 5:
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GestureDetector(
-              onTap: () {
-                print("1");
-              },
-              child: starFull),
-          GestureDetector(
-              onTap: () {
-                print("2");
-              },
-              child: starFull),
-          GestureDetector(
-              onTap: () {
-                print("3");
-              },
-              child: starFull),
-          GestureDetector(
-              onTap: () {
-                print("4");
-              },
-              child: starFull),
-          GestureDetector(
-              onTap: () {
-                print("5");
-              },
-              child: starFull)
-        ],
-      );
-    default:
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GestureDetector(
-              onTap: () {
-                print("1");
-              },
-              child: starGray),
-          GestureDetector(
-              onTap: () {
-                print("2");
-              },
-              child: starGray),
-          GestureDetector(
-              onTap: () {
-                print("3");
-              },
-              child: starGray),
-          GestureDetector(
-              onTap: () {
-                print("4");
-              },
-              child: starGray),
-          GestureDetector(
-              onTap: () {
-                print("5");
-              },
-              child: starGray),
-        ],
-      );
   }
 }
