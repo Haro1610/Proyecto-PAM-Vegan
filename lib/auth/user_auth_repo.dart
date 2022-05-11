@@ -5,6 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 class UserAuthRepository {
   final GoogleSignIn _googleSingIn = GoogleSignIn(scopes: ["email"]);
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  String photoUrl = "";
 
   bool isAlreadyAuthenticated() {
     return _auth.currentUser != null;

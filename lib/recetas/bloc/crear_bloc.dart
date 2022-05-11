@@ -25,7 +25,7 @@ class CrearBloc extends Bloc<CrearEvent, CrearState> {
       String _imgUrl = await _loadPictureToStorage(dataToSave["imagen"]);
       Map<String, dynamic> mapaReceta = {};
       mapaReceta["#reseñas"] = 0;
-      mapaReceta["autor"] = FirebaseAuth.instance.currentUser!.uid;
+      mapaReceta["autor"] = FirebaseAuth.instance.currentUser!.displayName;
       mapaReceta["imagen"] = _imgUrl;
       mapaReceta["nombre"] = dataToSave["nombre"];
       mapaReceta["stars"] = 0;
