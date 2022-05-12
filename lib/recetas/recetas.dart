@@ -21,6 +21,7 @@ class Platillo extends StatelessWidget {
   String ingredients = "Chile";
   String image = "";
   String description = "Echale mucho";
+  bool perfil = false;
 
   Platillo(int stars, String name, String author, String ingredients,
       String image, String description, bool perfil) {
@@ -30,10 +31,94 @@ class Platillo extends StatelessWidget {
     this.ingredients = ingredients;
     this.image = image;
     this.description = description;
+    this.perfil = perfil;
   }
 
   @override
   Widget build(BuildContext context) {
+    if (perfil) {
+      return TextButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => RecetasEsp(
+                {
+                  "stars": stars,
+                  "name": name,
+                  "author": author,
+                  "ingredients": ingredients,
+                  "image": image,
+                  "description": description
+                },
+              ),
+            ),
+          );
+        },
+        child: Card(
+          margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 3.0),
+          clipBehavior: Clip.antiAlias,
+          color: Colors.white,
+          elevation: 6.0,
+          child: Padding(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 8.0, vertical: 22.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Column(
+                        children: [
+                          Text(name,
+                              style: GoogleFonts.pacifico(
+                                textStyle: TextStyle(
+                                  color: Colors.green,
+                                  fontSize: 22.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )),
+                          SizedBox(
+                            height: 3.0,
+                          ),
+                          Text("Autor: " + author,
+                              style: GoogleFonts.overpass(
+                                textStyle: TextStyle(
+                                  color: Colors.green,
+                                  fontSize: 15.0,
+                                ),
+                              )),
+                          SizedBox(
+                            height: 3.0,
+                          ),
+                          RatingBarIndicator(
+                            rating: stars.toDouble(),
+                            itemBuilder: (context, index) => Icon(
+                              Icons.star,
+                              color: Colors.green,
+                            ),
+                            itemCount: 5,
+                            itemSize: 25.0,
+                            direction: Axis.horizontal,
+                          ),
+                        ],
+                      ),
+                      IconButton(
+                        onPressed: () {
+                          //TENEMOS QUE PONER UN BLOC QUE BORRE LA RECETA
+                        },
+                        icon: Icon(Icons.delete),
+                        color: Color.fromARGB(255, 191, 62, 52),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
     return TextButton(
       onPressed: () {
         Navigator.of(context).push(
@@ -61,51 +146,39 @@ class Platillo extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                child: Column(
                   children: [
-                    Column(
-                      children: [
-                        Text(name,
-                            style: GoogleFonts.pacifico(
-                              textStyle: TextStyle(
-                                color: Colors.green,
-                                fontSize: 22.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            )),
-                        SizedBox(
-                          height: 3.0,
-                        ),
-                        Text("Autor: " + author,
-                            style: GoogleFonts.overpass(
-                              textStyle: TextStyle(
-                                color: Colors.green,
-                                fontSize: 15.0,
-                              ),
-                            )),
-                        SizedBox(
-                          height: 3.0,
-                        ),
-                        RatingBarIndicator(
-                          rating: stars.toDouble(),
-                          itemBuilder: (context, index) => Icon(
-                            Icons.star,
+                    Text(name,
+                        style: GoogleFonts.pacifico(
+                          textStyle: TextStyle(
                             color: Colors.green,
+                            fontSize: 22.0,
+                            fontWeight: FontWeight.bold,
                           ),
-                          itemCount: 5,
-                          itemSize: 25.0,
-                          direction: Axis.horizontal,
-                        ),
-                      ],
+                        )),
+                    SizedBox(
+                      height: 3.0,
                     ),
-                    IconButton(
-                      onPressed: () {
-                        //TENEMOS QUE PONER UN BLOC QUE BORRE LA RECETA
-                      },
-                      icon: Icon(Icons.delete),
-                      color: Color.fromARGB(255, 191, 62, 52),
-                    )
+                    Text("Autor: " + author,
+                        style: GoogleFonts.overpass(
+                          textStyle: TextStyle(
+                            color: Colors.green,
+                            fontSize: 15.0,
+                          ),
+                        )),
+                    SizedBox(
+                      height: 3.0,
+                    ),
+                    RatingBarIndicator(
+                      rating: stars.toDouble(),
+                      itemBuilder: (context, index) => Icon(
+                        Icons.star,
+                        color: Colors.green,
+                      ),
+                      itemCount: 5,
+                      itemSize: 25.0,
+                      direction: Axis.horizontal,
+                    ),
                   ],
                 ),
               ),
