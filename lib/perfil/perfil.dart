@@ -73,7 +73,7 @@ class PerfilState extends State<Perfil> {
                             height: 5.0,
                           ),
                           Text(
-                            "3",
+                            "FALTA",
                             style: GoogleFonts.overpass(
                               textStyle: TextStyle(
                                 fontSize: 19.0,
@@ -108,12 +108,14 @@ class PerfilState extends State<Perfil> {
                       itemCount: state.myData.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Platillo(
-                            state.myData[index]['stars'],
-                            state.myData[index]['nombre'],
-                            state.myData[index]['autor'],
-                            state.myData[index]['ingredientes'],
-                            state.myData[index]['imagen'],
-                            state.myData[index]['procedimiento']);
+                          state.myData[index]['stars'],
+                          state.myData[index]['nombre'],
+                          state.myData[index]['autor'],
+                          state.myData[index]['ingredientes'],
+                          state.myData[index]['imagen'],
+                          state.myData[index]['procedimiento'],
+                          true,
+                        );
                       },
                     );
                   } else {

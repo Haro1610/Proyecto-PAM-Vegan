@@ -23,7 +23,7 @@ class Platillo extends StatelessWidget {
   String description = "Echale mucho";
 
   Platillo(int stars, String name, String author, String ingredients,
-      String image, String description) {
+      String image, String description, bool perfil) {
     this.stars = stars;
     this.name = name;
     this.author = author;
@@ -61,39 +61,51 @@ class Platillo extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                child: Column(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text(name,
-                        style: GoogleFonts.pacifico(
-                          textStyle: TextStyle(
+                    Column(
+                      children: [
+                        Text(name,
+                            style: GoogleFonts.pacifico(
+                              textStyle: TextStyle(
+                                color: Colors.green,
+                                fontSize: 22.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            )),
+                        SizedBox(
+                          height: 3.0,
+                        ),
+                        Text("Autor: " + author,
+                            style: GoogleFonts.overpass(
+                              textStyle: TextStyle(
+                                color: Colors.green,
+                                fontSize: 15.0,
+                              ),
+                            )),
+                        SizedBox(
+                          height: 3.0,
+                        ),
+                        RatingBarIndicator(
+                          rating: stars.toDouble(),
+                          itemBuilder: (context, index) => Icon(
+                            Icons.star,
                             color: Colors.green,
-                            fontSize: 22.0,
-                            fontWeight: FontWeight.bold,
                           ),
-                        )),
-                    SizedBox(
-                      height: 3.0,
+                          itemCount: 5,
+                          itemSize: 25.0,
+                          direction: Axis.horizontal,
+                        ),
+                      ],
                     ),
-                    Text("Autor: " + author,
-                        style: GoogleFonts.overpass(
-                          textStyle: TextStyle(
-                            color: Colors.green,
-                            fontSize: 15.0,
-                          ),
-                        )),
-                    SizedBox(
-                      height: 3.0,
-                    ),
-                    RatingBarIndicator(
-                      rating: stars.toDouble(),
-                      itemBuilder: (context, index) => Icon(
-                        Icons.star,
-                        color: Colors.green,
-                      ),
-                      itemCount: 5,
-                      itemSize: 25.0,
-                      direction: Axis.horizontal,
-                    ),
+                    IconButton(
+                      onPressed: () {
+                        //TENEMOS QUE PONER UN BLOC QUE BORRE LA RECETA
+                      },
+                      icon: Icon(Icons.delete),
+                      color: Color.fromARGB(255, 191, 62, 52),
+                    )
                   ],
                 ),
               ),
@@ -109,6 +121,7 @@ class Recetas extends StatelessWidget {
   TextEditingController _titulo = new TextEditingController();
   TextEditingController _ingredientes = new TextEditingController();
   TextEditingController _procedimiento = new TextEditingController();
+  TextEditingController _search = new TextEditingController();
   var _imagen;
   @override
   Widget build(BuildContext context) {
@@ -181,6 +194,15 @@ class Recetas extends StatelessWidget {
                 fontSize: 30.0,
                 color: Color.fromARGB(255, 17, 88, 19),
                 fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          Card(
+            child: TextField(
+              controller: _search,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: "Buscar una receta",
               ),
             ),
           ),
@@ -341,7 +363,7 @@ class Recetas extends StatelessWidget {
                             state.myData[index]['procedimiento'];
 
                         return Platillo(stars, nombre, autor, ingredientes,
-                            imagen, procedimiento);
+                            imagen, procedimiento, false);
                       },
                     );
                   } else {
