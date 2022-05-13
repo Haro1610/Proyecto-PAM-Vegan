@@ -105,7 +105,11 @@ class Platillo extends StatelessWidget {
                       ),
                       IconButton(
                         onPressed: () {
-                          //TENEMOS QUE PONER UN BLOC QUE BORRE LA RECETA
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) =>
+                                _buildPopupDialog(context),
+                          );
                         },
                         icon: Icon(Icons.delete),
                         color: Color.fromARGB(255, 191, 62, 52),
@@ -506,4 +510,50 @@ class Recetas extends StatelessWidget {
     );
     return chosenImage != null ? File(chosenImage.path) : null;
   }
+}
+
+Widget _buildPopupDialog(BuildContext context) {
+  return new AlertDialog(
+    backgroundColor: Color.fromARGB(255, 17, 88, 19),
+    content: new Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Column(
+          children: [
+            Text("¿Estas seguro que deseas eliminar la receta?",
+                style: GoogleFonts.overpass(
+                  textStyle: TextStyle(
+                    color: Colors.white,
+                    fontSize: 15.0,
+                  ),
+                )),
+            Row(
+              children: [
+                TextButton(
+                  onPressed: () {
+                    //AQUÍ DEBE IR EL BLOC QUE ELIMINA LA RECETA
+                    Navigator.pop(context, 'Cancelar');
+                  },
+                  child: Text(
+                    "Aceptar",
+                    style: TextStyle(color: Colors.green),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context, 'Cancelar');
+                  },
+                  child: Text(
+                    "Cancelar",
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ),
+              ],
+            )
+          ],
+        ),
+      ],
+    ),
+  );
 }
