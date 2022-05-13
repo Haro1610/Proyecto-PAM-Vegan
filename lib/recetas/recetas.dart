@@ -106,8 +106,6 @@ class Platillo extends StatelessWidget {
 }
 
 class Recetas extends StatelessWidget {
-  final _decoracion =
-      BoxDecoration(border: Border.all(color: Colors.blueAccent));
   TextEditingController _titulo = new TextEditingController();
   TextEditingController _ingredientes = new TextEditingController();
   TextEditingController _procedimiento = new TextEditingController();
@@ -192,7 +190,16 @@ class Recetas extends StatelessWidget {
                 context: context,
                 barrierDismissible: true,
                 builder: (_) => AlertDialog(
-                  title: Text("Nueva receta"),
+                  title: Text(
+                    "Nueva receta",
+                    style: GoogleFonts.pacifico(
+                      textStyle: TextStyle(
+                        fontSize: 30.0,
+                        color: Color.fromARGB(255, 17, 88, 19),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                   content: Wrap(
                     runSpacing: 18,
                     spacing: 18,
@@ -305,7 +312,7 @@ class Recetas extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              decoration: _decoracion,
+              decoration: null,
               height: 0,
               child: BlocConsumer<PendingBloc, PendingState>(
                 listener: (context, state) {},
