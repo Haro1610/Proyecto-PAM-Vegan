@@ -39,13 +39,23 @@ class PerfilState extends State<Perfil> {
                   BlocProvider.of<AuthBloc>(context).usuario.photoURL!),
               radius: 50.0,
             ),
-            Text(BlocProvider.of<AuthBloc>(context).usuario.displayName!,
-                style: GoogleFonts.overpass(
-                  textStyle: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.white,
-                  ),
-                )),
+            DefaultTextStyle(
+              style: GoogleFonts.overpass(
+                textStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 10.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              child:
+                  Text(BlocProvider.of<AuthBloc>(context).usuario.displayName!,
+                      style: GoogleFonts.overpass(
+                        textStyle: TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.white,
+                        ),
+                      )),
+            ),
             Card(
               margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
               clipBehavior: Clip.antiAlias,
