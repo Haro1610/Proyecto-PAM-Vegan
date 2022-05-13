@@ -60,7 +60,7 @@ class PerfilState extends State<Perfil> {
                       child: Column(
                         children: [
                           Text(
-                            "Recetas",
+                            "Recetas publicadas",
                             style: GoogleFonts.overpass(
                               textStyle: TextStyle(
                                 color: Colors.white,
@@ -72,14 +72,29 @@ class PerfilState extends State<Perfil> {
                           SizedBox(
                             height: 5.0,
                           ),
-                          Text(
-                            "FALTA",
-                            style: GoogleFonts.overpass(
-                              textStyle: TextStyle(
-                                fontSize: 19.0,
-                                color: Colors.white,
-                              ),
-                            ),
+                          BlocConsumer<ProfileRecetasBloc, ProfileRecetasState>(
+                            listener: (context, state) {},
+                            builder: (context, state) {
+                              if (state is ProfileRecetasSuccessState) {
+                                return Text(
+                                  state.myData.length.toString(),
+                                  style: GoogleFonts.overpass(
+                                    textStyle: TextStyle(
+                                      fontSize: 19.0,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                return Text("No hay recetas todavía",
+                                    style: GoogleFonts.overpass(
+                                      textStyle: TextStyle(
+                                        fontSize: 19.0,
+                                        color: Colors.white,
+                                      ),
+                                    ));
+                              }
+                            },
                           ),
                         ],
                       ),

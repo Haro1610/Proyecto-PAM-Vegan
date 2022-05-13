@@ -16,14 +16,14 @@ class Stars {
 
   //Esta función regresa la nueva calificación de las estrellas de la receta.
   //Falta un bloc que actualice la calificación en firebase de la receta.
-  double _updateStars(int stars, int global) {
+  int _updateStars(int stars, int global) {
     if (!rated) {
-      double calificacion = 0.0;
+      int calificacion = 0;
       rated = true;
       if (global == 0) {
-        calificacion = stars.toDouble();
+        calificacion = stars.toDouble().ceil();
       } else {
-        calificacion = (stars + global) / 2;
+        calificacion = ((stars + global) / 2).ceil();
       }
       print(calificacion);
       return calificacion;
@@ -36,19 +36,16 @@ class Stars {
       Icons.star,
       color: Colors.white,
       size: 24.0,
-      semanticLabel: 'Text to announce in accessibility modes',
     );
     var starEmpty = Icon(
       Icons.star_border_outlined,
       color: Colors.white,
       size: 24.0,
-      semanticLabel: 'Text to announce in accessibility modes',
     );
     var starGray = Icon(
       Icons.star,
       color: Color.fromARGB(255, 92, 92, 92),
       size: 24.0,
-      semanticLabel: 'Text to announce in accessibility modes',
     );
     switch (stars) {
       case 0:

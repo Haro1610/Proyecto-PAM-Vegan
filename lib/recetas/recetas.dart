@@ -270,14 +270,40 @@ class Recetas extends StatelessWidget {
               ),
             ),
           ),
-          Card(
-            child: TextField(
-              controller: _search,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: "Buscar una receta",
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Container(
+                width: _screen.width / 1.5,
+                child: Card(
+                  elevation: 6.0,
+                  child: TextField(
+                    controller: _search,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.all(10),
+                      border: OutlineInputBorder(),
+                      labelText: "Buscar una receta",
+                    ),
+                    style: GoogleFonts.overpass(
+                      textStyle: TextStyle(
+                        fontSize: 15.0,
+                        color: Color.fromARGB(255, 17, 88, 19),
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
               ),
-            ),
+              Card(
+                elevation: 6.0,
+                color: Color.fromARGB(255, 17, 88, 19),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: Icon(Icons.search),
+                  color: Colors.white,
+                ),
+              ),
+            ],
           ),
           TextButton(
             onPressed: () {
@@ -290,7 +316,6 @@ class Recetas extends StatelessWidget {
                     style: GoogleFonts.pacifico(
                       textStyle: TextStyle(
                         fontSize: 30.0,
-                        color: Color.fromARGB(255, 17, 88, 19),
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -305,6 +330,12 @@ class Recetas extends StatelessWidget {
                           border: OutlineInputBorder(),
                           labelText: "Titulo",
                         ),
+                        style: GoogleFonts.overpass(
+                          textStyle: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                       TextField(
                         controller: _ingredientes,
@@ -312,12 +343,24 @@ class Recetas extends StatelessWidget {
                           border: OutlineInputBorder(),
                           labelText: "Ingredientes",
                         ),
+                        style: GoogleFonts.overpass(
+                          textStyle: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                       TextField(
                         controller: _procedimiento,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: "Procedimiento",
+                        ),
+                        style: GoogleFonts.overpass(
+                          textStyle: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                       Row(
