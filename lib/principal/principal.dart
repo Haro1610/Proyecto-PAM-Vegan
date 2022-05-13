@@ -8,10 +8,12 @@ import 'package:planternativo/auth/bloc/auth_bloc.dart';
 import 'package:planternativo/login/login.dart';
 import 'package:planternativo/perfil/perfil.dart';
 import 'package:planternativo/recetaEsp/recetaEsp.dart';
+import 'package:planternativo/recetas/bloc/pending_bloc.dart';
 import 'package:planternativo/recetas/recetas.dart';
 import 'package:planternativo/restaurantes/restaurantes.dart';
 import 'package:planternativo/restaurantes/restaurantes.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+import 'dart:math';
 
 class Principal extends StatefulWidget {
   Principal({Key? key}) : super(key: key);
@@ -27,6 +29,7 @@ class _PrincipalState extends State<Principal> {
   @override
   Widget build(BuildContext context) {
     final _screen = MediaQuery.of(context).size;
+
     String _telefono = "3318503861";
     String _imagen =
         "https://www.sabrosia.pr/resizer/U8dw60E4ucVskb2IH5vRcWVWlvw=/1440x0/filters:format(jpg):quality(70)/cloudfront-us-east-1.images.arcpublishing.com/metroworldnews/JDPCVRO6AFGATNQHEVA4EFZCTA.jpg";
@@ -234,37 +237,61 @@ class _PrincipalState extends State<Principal> {
                     fontWeight: FontWeight.bold,
                   )),
                 ),
-                GestureDetector(
-                  onTap: () {
-                    //NECESITAMOS TENER UNA RECETA SIN HARDCODEAR PENDEJOS ESTÚPIDOS
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => RecetasEsp({
-                              "stars": 3,
-                              "name": "nombre",
-                              "author": "juan",
-                              "ingredients": "chile",
-                              "image": "pichulin",
-                              "description": "descricion"
-                            })));
-                  },
-                  child: Container(
-                    height: 200,
-                    width: 200,
-                    child: Card(
-                      semanticContainer: true,
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      child: Image.network(
-                        _imagen,
-                        fit: BoxFit.fill,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      elevation: 5,
-                      margin: EdgeInsets.all(10),
-                    ),
-                  ),
-                ),
+                BlocConsumer<PendingBloc, PendingState>(
+                    listener: (context, state) {},
+                    builder: (context, state) {
+                      if (state is PendingFotosSuccessState) {
+                        int index = Random().nextInt(state.myData.length);
+                        return GestureDetector(
+                          onTap: () {
+                            //NECESITAMOS TENER UNA RECETA SIN HARDCODEAR PENDEJOS ESTÚPIDOS
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => RecetasEsp({
+                                      "stars": state.myData[index]['stars'],
+                                      "name": state.myData[index]['nombre'],
+                                      "author": state.myData[index]['autor'],
+                                      "ingredients": state.myData[index]
+                                          ['ingredientes'],
+                                      "image": state.myData[index]['imagen'],
+                                      "description": state.myData[index]
+                                          ['procedimiento']
+                                    })));
+                          },
+                          child: Container(
+                            height: 200,
+                            width: 200,
+                            child: Card(
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              child: Image.network(
+                                state.myData[index]['imagen'],
+                                fit: BoxFit.fill,
+                              ),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              elevation: 6,
+                              margin: EdgeInsets.all(10),
+                            ),
+                          ),
+                        );
+                      }
+                      return Container(
+                        height: 200,
+                        width: 200,
+                        child: Card(
+                          clipBehavior: Clip.antiAliasWithSaveLayer,
+                          child: Image.network(
+                            "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Feskipaper.com%2Fimages%2Fgreen-13.jpg&f=1&nofb=1",
+                            fit: BoxFit.fill,
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          elevation: 6,
+                          margin: EdgeInsets.all(10),
+                        ),
+                      );
+                    }),
               ],
             )
           ]),

@@ -39,13 +39,23 @@ class PerfilState extends State<Perfil> {
                   BlocProvider.of<AuthBloc>(context).usuario.photoURL!),
               radius: 50.0,
             ),
-            Text(BlocProvider.of<AuthBloc>(context).usuario.displayName!,
-                style: GoogleFonts.overpass(
-                  textStyle: TextStyle(
-                    fontSize: 20.0,
-                    color: Colors.white,
-                  ),
-                )),
+            DefaultTextStyle(
+              style: GoogleFonts.overpass(
+                textStyle: TextStyle(
+                  color: Colors.white,
+                  fontSize: 10.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              child:
+                  Text(BlocProvider.of<AuthBloc>(context).usuario.displayName!,
+                      style: GoogleFonts.overpass(
+                        textStyle: TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.white,
+                        ),
+                      )),
+            ),
             Card(
               margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
               clipBehavior: Clip.antiAlias,
@@ -60,7 +70,7 @@ class PerfilState extends State<Perfil> {
                       child: Column(
                         children: [
                           Text(
-                            "Recetas",
+                            "Recetas publicadas",
                             style: GoogleFonts.overpass(
                               textStyle: TextStyle(
                                 color: Colors.white,
@@ -72,14 +82,29 @@ class PerfilState extends State<Perfil> {
                           SizedBox(
                             height: 5.0,
                           ),
-                          Text(
-                            "DEBEMOS MOSTRAR LA CANT DE RECETAS",
-                            style: GoogleFonts.overpass(
-                              textStyle: TextStyle(
-                                fontSize: 19.0,
-                                color: Colors.white,
-                              ),
-                            ),
+                          BlocConsumer<ProfileRecetasBloc, ProfileRecetasState>(
+                            listener: (context, state) {},
+                            builder: (context, state) {
+                              if (state is ProfileRecetasSuccessState) {
+                                return Text(
+                                  state.myData.length.toString(),
+                                  style: GoogleFonts.overpass(
+                                    textStyle: TextStyle(
+                                      fontSize: 19.0,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                return Text("No hay recetas todavía",
+                                    style: GoogleFonts.overpass(
+                                      textStyle: TextStyle(
+                                        fontSize: 19.0,
+                                        color: Colors.white,
+                                      ),
+                                    ));
+                              }
+                            },
                           ),
                         ],
                       ),
@@ -108,12 +133,14 @@ class PerfilState extends State<Perfil> {
                       itemCount: state.myData.length,
                       itemBuilder: (BuildContext context, int index) {
                         return Platillo(
-                            state.myData[index]['stars'],
-                            state.myData[index]['nombre'],
-                            state.myData[index]['autor'],
-                            state.myData[index]['ingredientes'],
-                            state.myData[index]['imagen'],
-                            state.myData[index]['procedimiento']);
+                          state.myData[index]['stars'],
+                          state.myData[index]['nombre'],
+                          state.myData[index]['autor'],
+                          state.myData[index]['ingredientes'],
+                          state.myData[index]['imagen'],
+                          state.myData[index]['procedimiento'],
+                          true,
+                        );
                       },
                     );
                   } else {
