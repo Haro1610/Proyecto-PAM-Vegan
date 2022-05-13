@@ -14,8 +14,6 @@ import '../auth/bloc/auth_bloc.dart';
 class Stars {
   bool rated = false;
 
-  //Esta función regresa la nueva calificación de las estrellas de la receta.
-  //Falta un bloc que actualice la calificación en firebase de la receta.
   int _updateStars(int stars, int global) {
     if (!rated) {
       int calificacion = 0;
@@ -25,6 +23,8 @@ class Stars {
       } else {
         calificacion = ((stars + global) / 2).ceil();
       }
+      //AQUI EN VEZ DE PRINT CALIFICACIÓN SE DEBE ACTUALIZAR ESTA RECETA REMPLAZANDO STARS
+      //POR CALIFICACIÓN
       print(calificacion);
       return calificacion;
     }
@@ -463,14 +463,10 @@ class RecetasEsp extends StatelessWidget {
   }
 
   Future _storeAndShare(Uint8List bytes) async {
-    ///Store Plugin
-    print("hola");
     final directory = await getApplicationDocumentsDirectory();
     final imagePath = await File('${directory.path}/img.png').create();
     await imagePath.writeAsBytes(bytes);
     print(imagePath);
-
-    /// Share Plugin
     await Share.shareFiles([imagePath.path]);
   }
 }

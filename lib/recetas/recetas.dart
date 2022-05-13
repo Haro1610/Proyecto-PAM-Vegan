@@ -12,6 +12,7 @@ import 'package:planternativo/recetaEsp/recetaEsp.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:planternativo/recetas/bloc/crear_bloc.dart';
 
+import '../perfil/bloc/profile_recetas_bloc.dart';
 import 'bloc/pending_bloc.dart';
 
 class Platillo extends StatelessWidget {
@@ -234,6 +235,8 @@ class Recetas extends StatelessWidget {
                     children: [
                       IconButton(
                         onPressed: () {
+                          BlocProvider.of<ProfileRecetasBloc>(context)
+                              .add(GetProfileRecetasEvent());
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => Perfil()));
                         },
@@ -376,7 +379,6 @@ class Recetas extends StatelessWidget {
                           ElevatedButton(
                               onPressed: () async {
                                 _imagen = await _pickImage();
-                                //_imagen debe guardarse en firebase
                               },
                               child: Text("Elegir imagen")),
                         ],
@@ -398,7 +400,7 @@ class Recetas extends StatelessWidget {
                             BlocProvider.of<CrearBloc>(context).add(
                                 OnCrearSaveDataEvent(dataToSave: recetaMapa));
                             Navigator.pop(context, 'Cancelar');
-                            await Future.delayed(Duration(seconds: 1));
+                            await Future.delayed(Duration(seconds: 2));
                             BlocProvider.of<PendingBloc>(context)
                                 .add(GetRecetasEvent());
                           },
