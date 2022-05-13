@@ -302,7 +302,10 @@ class Recetas extends StatelessWidget {
                 elevation: 6.0,
                 color: Color.fromARGB(255, 17, 88, 19),
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    //ESTO ES LO QUE SE TIENE QUE FILTRAR EN FIREBASE PARA MOSTRAR ESTE NOMBRE
+                    print(_search.value.text);
+                  },
                   icon: Icon(Icons.search),
                   color: Colors.white,
                 ),
@@ -384,7 +387,7 @@ class Recetas extends StatelessWidget {
                     Wrap(
                       children: [
                         TextButton(
-                          onPressed: () {
+                          onPressed: () async {
                             Map<String, dynamic> recetaMapa = {};
                             recetaMapa = {
                               "nombre": _titulo.value.text,
@@ -394,11 +397,10 @@ class Recetas extends StatelessWidget {
                             };
                             BlocProvider.of<CrearBloc>(context).add(
                                 OnCrearSaveDataEvent(dataToSave: recetaMapa));
-
-                            //Este bloc no funciona bien, no se actualiza la lista de recetas al crear una nueva.
+                            Navigator.pop(context, 'Cancelar');
+                            await Future.delayed(Duration(seconds: 1));
                             BlocProvider.of<PendingBloc>(context)
                                 .add(GetRecetasEvent());
-                            Navigator.pop(context, 'Cancelar');
                           },
                           child: Text(
                             "Aceptar",
