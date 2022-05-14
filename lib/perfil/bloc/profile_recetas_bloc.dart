@@ -37,11 +37,12 @@ FutureOr<void> _getMyContent(event, emit) async {
         await FirebaseFirestore.instance.collection("recetas").get();
 
     // query de Dart filtrando la info utilizando como referencia la lista de ids de docs del usuario actual
-    var myContentList = queryFotos.docs
-        .where((doc) => listIds.contains(doc.id))
-        .map((doc) => doc.data().cast<String, dynamic>())
-        .toList();
-
+    var myContentList =
+        queryFotos.docs.where((doc) => listIds.contains(doc.id)).map((doc) {
+      var mp = doc.data().cast<String, dynamic>();
+      mp["id"] = doc.id;
+      return mp;
+    }).toList();
     print(myContentList);
 
     // lista de documentos filtrados del usuario con sus datos de fotos en espera
