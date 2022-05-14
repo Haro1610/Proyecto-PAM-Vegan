@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -543,6 +544,15 @@ Widget _buildPopupDialog(BuildContext context, id) {
                         .collection("recetas")
                         .doc(id)
                         .delete();
+
+                    var queryUser = FirebaseFirestore.instance
+                        .collection("users")
+                        .doc(FirebaseAuth.instance.currentUser!.uid)
+                        .get();
+
+                    print("=========================================");
+                    print(queryUser);
+                    print("=========================================");
 
                     Navigator.pop(context);
                   },
