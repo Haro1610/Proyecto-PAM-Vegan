@@ -309,6 +309,7 @@ class _PrincipalState extends State<Principal> {
         type: BottomNavigationBarType.fixed,
         currentIndex: _currentPageIndex,
         onTap: (index) {
+          BlocProvider.of<PendingBloc>(context).add(GetRecetasEvent());
           setState(
             () {
               _currentPageIndex = index;
