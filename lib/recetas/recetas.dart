@@ -545,14 +545,18 @@ Widget _buildPopupDialog(BuildContext context, id) {
                         .doc(id)
                         .delete();
 
-                    var queryUser = FirebaseFirestore.instance
+                    BlocProvider.of<ProfileRecetasBloc>(context)
+                        .add(GetProfileRecetasEvent());
+
+                    /* var queryUser = FirebaseFirestore.instance
                         .collection("users")
                         .doc(FirebaseAuth.instance.currentUser!.uid)
-                        .get();
+                        .data().get();
 
                     print("=========================================");
                     print(queryUser);
-                    print("=========================================");
+                    queryUser.remove(id);
+                    print("========================================="); */
 
                     Navigator.pop(context);
                   },
