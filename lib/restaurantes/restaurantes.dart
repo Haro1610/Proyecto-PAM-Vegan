@@ -1,85 +1,85 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
-import 'package:geolocator/geolocator.dart';
 
 class MapSample extends StatefulWidget {
   @override
-  State<MapSample> createState() => MapSampleState();
+  State<MapSample> createState() => _MapSampleState();
 }
 
-class MapSampleState extends State<MapSample> {
-  late GoogleMapController googleMapController;
+class _MapSampleState extends State<MapSample> {
+  final Completer<GoogleMapController> _controller = Completer();
 
+  List<Marker> _markers = <Marker>[];
+
+  // static const CameraPosition _kGooglePlex = CameraPosition(
+  //   target: LatLng(33.6844, 73.0479),
+  //   zoom: 14,
+  // );
   static CameraPosition initialMapPosition = CameraPosition(
-      target: LatLng(20.665965601910823, -103.3937151456212), zoom: 14);
+      target: LatLng(20.665965601910823, -103.3937151456212), zoom: 20);
 
-  Set<Marker> markers = {};
+  List<Marker> _puntos = [];
+  List<Marker> _list = const [
+    Marker(
+        markerId: MarkerId('La estancia vegana'),
+        position: LatLng(20.665965601910823, -103.3937151456212),
+        infoWindow: InfoWindow(title: 'La estancia vegana')),
+    Marker(
+        markerId: MarkerId('Vegano 2'),
+        position: LatLng(20.675798389104823, -103.35728688472331)),
+    Marker(
+        markerId: MarkerId('Fonda vegana'),
+        position: LatLng(20.681112855013716, -103.35297200997564)),
+    Marker(
+        markerId: MarkerId('Chico zapote'),
+        position: LatLng(20.674590923183647, -103.36084111355395)),
+  ];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _puntos.addAll(_list);
+  }
 
   @override
   Widget build(BuildContext context) {
-    final _mapScreen = MediaQuery.of(context).size;
     return Scaffold(
-      body: GoogleMap(
-        initialCameraPosition: initialMapPosition,
-        markers: markers,
-        zoomControlsEnabled: false,
-        mapType: MapType.normal,
-        onMapCreated: (GoogleMapController controller) {
-          googleMapController = controller;
-        },
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {
-          Position position = await _determinePosition();
-
-          googleMapController.animateCamera(CameraUpdate.newCameraPosition(
-              CameraPosition(
-                  target: LatLng(position.latitude, position.longitude),
-                  zoom: 14)));
-
-          markers.clear();
-
-          markers.add(Marker(
-              markerId: const MarkerId('Ubicacion'),
-              position: LatLng(position.latitude, position.longitude)));
-
-          setState(() {});
-        },
-        label: const Text("Tu ubicacion"),
-        icon: const Icon(Icons.location_history),
+      body: SafeArea(
+        child: GoogleMap(
+            initialCameraPosition: initialMapPosition,
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
+            },
+            markers: Set<Marker>.of(_puntos)),
       ),
     );
   }
-
-  Future<Position> _determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission userPermission;
-
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled');
-    }
-
-    userPermission = await Geolocator.checkPermission();
-
-    if (userPermission == LocationPermission.denied) {
-      userPermission = await Geolocator.requestPermission();
-
-      if (userPermission == LocationPermission.denied) {
-        return Future.error("Location permission denied");
-      }
-    }
-
-    if (userPermission == LocationPermission.deniedForever) {
-      return Future.error('Location permissions are permanently denied');
-    }
-
-    Position position = await Geolocator.getCurrentPosition();
-
-    return position;
-  }
 }
+
+// List<Marker> list = const [
+//   Marker(
+//       markerId: MarkerId('SomeId'),
+//       position: LatLng(33.6844, 73.0479),
+//       infoWindow: InfoWindow(
+//           title: 'The title of the marker'
+//       )
+//   ),
+//   Marker(
+//       markerId: MarkerId('SomeId'),
+//       position: LatLng( 33.738045,73.084488),
+//       infoWindow: InfoWindow(
+//           title: 'e-11 islamabd'
+//       )
+//   ),
+// ];
+//
+// @override
+// void initState() {
+//   // TODO: implement initState
+//   super.initState();
+//   _markers.addAll(
+//       list);
+// }
