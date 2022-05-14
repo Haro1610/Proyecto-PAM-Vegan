@@ -13,7 +13,6 @@ import '../auth/bloc/auth_bloc.dart';
 
 class Stars {
   bool rated = false;
-
   int _updateStars(int stars, int global) {
     if (!rated) {
       int calificacion = 0;
@@ -23,6 +22,7 @@ class Stars {
       } else {
         calificacion = ((stars + global) / 2).ceil();
       }
+
       //AQUI EN VEZ DE PRINT CALIFICACIÓN SE DEBE ACTUALIZAR ESTA RECETA REMPLAZANDO STARS
       //POR CALIFICACIÓN
       print(calificacion);
