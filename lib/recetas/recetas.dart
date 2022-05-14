@@ -488,6 +488,9 @@ class Recetas extends StatelessWidget {
                         var imagen = state.myData[index]['imagen'];
                         var procedimiento =
                             state.myData[index]['procedimiento'];
+
+                        return Platillo(stars, nombre, autor, ingredientes,
+                            imagen, procedimiento, "-", false);
                       },
                     );
                   } else {
