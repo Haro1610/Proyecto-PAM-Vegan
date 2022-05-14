@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,10 +24,11 @@ class Platillo extends StatelessWidget {
   String ingredients = "Chile";
   String image = "";
   String description = "Echale mucho";
+  String id = '';
   bool perfil = false;
 
   Platillo(int stars, String name, String author, String ingredients,
-      String image, String description, bool perfil) {
+      String image, String description, String id, bool perfil) {
     this.stars = stars;
     this.name = name;
     this.author = author;
@@ -33,6 +36,7 @@ class Platillo extends StatelessWidget {
     this.image = image;
     this.description = description;
     this.perfil = perfil;
+    this.id = id;
   }
 
   @override
@@ -109,7 +113,7 @@ class Platillo extends StatelessWidget {
                           showDialog(
                             context: context,
                             builder: (BuildContext context) =>
-                                _buildPopupDialog(context),
+                                _buildPopupDialog(context, id),
                           );
                         },
                         icon: Icon(Icons.delete),
@@ -487,7 +491,7 @@ class Recetas extends StatelessWidget {
                             state.myData[index]['procedimiento'];
 
                         return Platillo(stars, nombre, autor, ingredientes,
-                            imagen, procedimiento, false);
+                            imagen, procedimiento, "-", false);
                       },
                     );
                   } else {
@@ -516,7 +520,7 @@ class Recetas extends StatelessWidget {
   }
 }
 
-Widget _buildPopupDialog(BuildContext context) {
+Widget _buildPopupDialog(BuildContext context, id) {
   return new AlertDialog(
     backgroundColor: Color.fromARGB(255, 17, 88, 19),
     content: new Column(
@@ -536,8 +540,25 @@ Widget _buildPopupDialog(BuildContext context) {
               children: [
                 TextButton(
                   onPressed: () {
-                    //AQUÍ DEBE IR EL BLOC QUE ELIMINA LA RECETA
-                    Navigator.pop(context, 'Cancelar');
+                    FirebaseFirestore.instance
+                        .collection("recetas")
+                        .doc(id)
+                        .delete();
+
+                    BlocProvider.of<ProfileRecetasBloc>(context)
+                        .add(GetProfileRecetasEvent());
+
+                    /* var queryUser = FirebaseFirestore.instance
+                        .collection("users")
+                        .doc(FirebaseAuth.instance.currentUser!.uid)
+                        .data().get();
+
+                    print("=========================================");
+                    print(queryUser);
+                    queryUser.remove(id);
+                    print("========================================="); */
+
+                    Navigator.pop(context);
                   },
                   child: Text(
                     "Aceptar",
@@ -546,7 +567,7 @@ Widget _buildPopupDialog(BuildContext context) {
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.pop(context, 'Cancelar');
+                    Navigator.pop(context);
                   },
                   child: Text(
                     "Cancelar",

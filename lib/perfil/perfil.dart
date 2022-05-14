@@ -96,13 +96,15 @@ class PerfilState extends State<Perfil> {
                                   ),
                                 );
                               } else {
-                                return Text("No hay recetas todavía",
-                                    style: GoogleFonts.overpass(
-                                      textStyle: TextStyle(
-                                        fontSize: 19.0,
-                                        color: Colors.white,
-                                      ),
-                                    ));
+                                return Text(
+                                  "No hay recetas todavía",
+                                  style: GoogleFonts.overpass(
+                                    textStyle: TextStyle(
+                                      fontSize: 19.0,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                );
                               }
                             },
                           ),
@@ -139,6 +141,7 @@ class PerfilState extends State<Perfil> {
                           state.myData[index]['ingredientes'],
                           state.myData[index]['imagen'],
                           state.myData[index]['procedimiento'],
+                          state.myData[index]['id'],
                           true,
                         );
                       },
